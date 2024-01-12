@@ -1,13 +1,13 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navigation from './Navigation'; // adjust the path based on your file structure
-import Introduction from './Introduction';
-import WordList from './WordList';
-import MultipleChoice from './MultipleChoice';
-import Exercise from './Exercise';
-import WritingExercise from './WritingExercise';
-import SpeakingExercise from './SpeakingExercise';
-import FillInTheBlanks from './FillInTheBlanks';
+import Navigation from './components/Navigation'; // adjust the path based on your file structure
+import Introduction from './pages/Introduction';
+import WordList from './pages/WordList';
+import MultipleChoice from './pages/MultipleChoice';
+import Exercise from './pages/Exercise';
+import WritingExercise from './pages/WritingExercise';
+import SpeakingExercise from './pages/SpeakingExercise';
+import FillInTheBlanks from './pages/FillInTheBlanks';
 
 function App() {
   return (

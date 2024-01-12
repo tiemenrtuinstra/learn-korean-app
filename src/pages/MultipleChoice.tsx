@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import words from './words.json';
-import AlertBox from './AlertBox';
+import words from '../words.json';
+import AlertBox from '../components/AlertBox';
 import { Button, Box, Typography } from '@mui/material';
 
 const MultipleChoice = () => {

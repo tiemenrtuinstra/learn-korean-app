@@ -1,6 +1,6 @@
 // SpeakingExercise.tsx
 import React, { useEffect, useState } from 'react';
-import words from './words.json';
+import words from '../words.json';
 
 const SpeakingExercise = () => {
   const [currentWord, setCurrentWord] = useState(words[0]);
