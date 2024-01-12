@@ -1,25 +1,28 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navigation from './Navigation'; // adjust the path based on your file structure
+import Introduction from './Introduction';
+import WordList from './WordList';
+import MultipleChoice from './MultipleChoice';
+import Exercise from './Exercise';
+import WritingExercise from './WritingExercise';
+import SpeakingExercise from './SpeakingExercise';
+import FillInTheBlanks from './FillInTheBlanks';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Navigation />
+      <Routes>
+        <Route path="/" element={<Introduction />} />
+        <Route path="/word-list" element={<WordList />} />
+        <Route path="/multiple-choice" element={<MultipleChoice />} />
+        <Route path="/exercise" element={<Exercise />} />
+        <Route path="/writing" element={<WritingExercise />} />
+        <Route path="/speaking" element={<SpeakingExercise />} />
+        <Route path="/fill-in-the-blanks" element={<FillInTheBlanks />} />
+      </Routes>
+    </Router>
   );
 }
 
