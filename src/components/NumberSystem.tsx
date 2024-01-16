@@ -24,10 +24,11 @@ const NumberSystem: React.FC<NumbersListProps> = ({ numbers, page, rowsPerPage, 
                 <Table sx={{ maxWidth: 800, margin: "auto" }}>
                     <TableHead>
                         <TableRow>
-                            <TableCell style={{ width: '1%' }}>Number</TableCell>
-                            <TableCell align="right">Hangul</TableCell>
-                            <TableCell align="right">Romanisation</TableCell>
-                            <TableCell align="right">Listen</TableCell>
+
+                            <TableCell align="center" sx={{ width: '1%', fontWeight: "bold", color: "primary.main" }}>Number</TableCell>
+                            <TableCell align="left" sx={{ fontWeight: "bold", color: "primary.main" }}>Hangul</TableCell>
+                            <TableCell align="left" sx={{ fontWeight: "bold", color: "primary.main" }}>Romanisation</TableCell>
+                            <TableCell align="center" sx={{ width: '1%', fontWeight: "bold", color: "primary.main" }}>Listen</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -36,11 +37,9 @@ const NumberSystem: React.FC<NumbersListProps> = ({ numbers, page, rowsPerPage, 
                             : numbers
                         ).map((number: Number) => (
                             <TableRow key={number.number}>
-                                <TableCell>
-                                    {number.number}
-                                </TableCell>
-                                <TableCell align="right">{numberSystem === 'korean' ? number.korean : number.sinoKorean}</TableCell>
-                                <TableCell align="right">{numberSystem === 'korean' ? number.koreanRomanisation : number.sinoKoreanRomanisation}</TableCell>
+                                <TableCell align="center" >{number.number}</TableCell>
+                                <TableCell align="left">{numberSystem === 'korean' ? number.korean : number.sinoKorean}</TableCell>
+                                <TableCell align="left">{numberSystem === 'korean' ? number.koreanRomanisation : number.sinoKoreanRomanisation}</TableCell>
                                 <ListenCell text={numberSystem === 'korean' ? number.korean : number.sinoKorean} lang="ko" />
                             </TableRow>
                         ))}
