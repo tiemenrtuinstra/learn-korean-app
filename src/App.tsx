@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import './App.scss';
 import Introduction from './pages/Introduction';
 import WordList from './pages/WordList';
 import NumberList from './pages/NumberList';
@@ -8,7 +9,6 @@ import WritingExercise from './pages/WritingExercise';
 import SpeakingExercise from './pages/SpeakingExercise';
 import FillInTheBlanks from './pages/FillInTheBlanks';
 import Navigation from './components/Navigation';
-import './App.less';
 
 const App = () => {
   return (
