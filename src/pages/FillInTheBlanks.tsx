@@ -1,6 +1,6 @@
 // FillInTheBlanks.tsx
 import React, { useState } from 'react';
-import words from '../words.json';
+import words from '../database/words.json';
 
 const FillInTheBlanks = () => {
   const [currentWord, setCurrentWord] = useState(words[0]);

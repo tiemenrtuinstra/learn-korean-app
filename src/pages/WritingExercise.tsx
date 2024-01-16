@@ -1,6 +1,6 @@
 // WritingExercise.tsx
 import React, { useRef, useEffect, useState } from 'react';
-import words from '../words.json';
+import words from '../database/words.json';
 
 const WritingExercise = () => {
   const [currentWord, setCurrentWord] = useState(words[0].dutch);

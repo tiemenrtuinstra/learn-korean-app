@@ -44,3 +44,30 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+
+# Database Conversion Script
+
+This script allows you to convert a JSON file to an Excel file and vice versa.
+
+## Usage
+
+You can run this script from the command line with the `--json` option to convert a JSON file to Excel, or the `--excel` option to convert an Excel file to JSON.
+
+### Convert JSON to Excel
+
+To convert a JSON file to Excel, use the `--json` option followed by the name of the JSON file. For example:
+
+```bash
+python convert-database.py --json words.json
+```
+
+This will create an Excel file named output.xlsx.
+
+### Convert Excel to JSON
+To convert an Excel file to JSON, use the --excel option followed by the name of the Excel file. For example:
+
+```bash
+python convert-database.py --excel words.xlsx
+```
+This will create a JSON file named output.json.

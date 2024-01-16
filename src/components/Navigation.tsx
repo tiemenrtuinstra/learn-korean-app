@@ -44,6 +44,7 @@ function Navigation() {
         {[
           "Introduction",
           "Word List",
+          "Number List",
           "Multiple Choice",
           "Exercise",
           "Writing",

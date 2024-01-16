@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import words from '../words.json';
+import words from '../database/words.json';
 import AlertBox from '../components/AlertBox';
 import { Button, Box, Typography } from '@mui/material';
 
@@ -18,7 +18,7 @@ const MultipleChoice = () => {
         newOptions.push(randomWord.dutch);
       }
     }
-    setOptions(newOptions.sort(() => Math.random() - 0.5));
+    setOptions(newOptions.filter(option => option !== undefined).sort(() => Math.random() - 0.5));
   }, [currentQuestion]);
 
   const handleAnswerClick = (answer: string) => {
