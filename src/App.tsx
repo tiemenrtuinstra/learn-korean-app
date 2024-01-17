@@ -9,9 +9,11 @@ import Exercise from './pages/Exercise';
 import WritingExercise from './pages/WritingExercise';
 import SpeakingExercise from './pages/SpeakingExercise';
 import FillInTheBlanks from './pages/FillInTheBlanks';
+import Translator from './pages/Translator';
 import Navigation from './components/Navigation';
 import BottomNavigation from './components/BottomNavigation';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import TranslationPage from './pages/Translator';
 
 enum Colors {
   Yellow = '#F7D619',
@@ -64,17 +66,20 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <Router>
         <Navigation />
+        <section id="content">
         <Routes>
           <Route path="/" element={<Introduction />} />
           <Route path="/alphabet" element={<HangulAlphabet />} />
           <Route path="/word-list" element={<WordList />} />
           <Route path="/number-list" element={<NumberList />} />
+          <Route path="/translate" element={<Translator />} />
           <Route path="/multiple-choice" element={<MultipleChoice />} />
           <Route path="/exercise" element={<Exercise />} />
           <Route path="/writing" element={<WritingExercise />} />
           <Route path="/speaking" element={<SpeakingExercise />} />
           <Route path="/fill-in-the-blanks" element={<FillInTheBlanks />} />
         </Routes>
+        </section>
         <BottomNavigation />
       </Router>
     </ThemeProvider>
