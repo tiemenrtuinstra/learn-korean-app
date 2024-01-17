@@ -85,6 +85,7 @@ const WordList = () => {
           <TableRow>
             <LanguageHeadCell
               language="hangul"
+              fieldTitle="한글"
               sortField={sortField || ""}
               sortDirection={sortDirection}
               handleSort={handleSort}

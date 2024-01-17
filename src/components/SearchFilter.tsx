@@ -106,7 +106,7 @@ export const SearchFilter: React.FC<SearchFilterProps> = ({
                   fullWidth
                 >
                   <MenuItem value="">
-                    <em>None</em>
+                    <em>Alle categorieen</em>
                   </MenuItem>
                   {Array.from(new Set(words.map((item: any) => item.source)))
                     .sort()

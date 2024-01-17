@@ -24,14 +24,12 @@ const NumberList = () => {
         <Box display="flex" justifyContent="center">
           <Button
             variant="contained"
-            color="primary"
             onClick={() => setSelectedSystem('korean')}
           >
             Go to Korean Numbers
           </Button>
           <Button
             variant="contained"
-            color="primary"
             onClick={() => setSelectedSystem('sino-korean')}
             style={{ marginLeft: "1rem" }}
           >

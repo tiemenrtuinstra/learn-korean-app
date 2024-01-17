@@ -1,10 +1,9 @@
-import hangulRomanization from 'hangul-romanization';
 import alphabetJson from './database/alphabet.json';
 
 export type Alphabet = {
     hangul: string;
-    romanisation?: string;
-    letter: string;
+    romanisation: string;
+    type: string;
 };
 
 export type AlphabetListProps = {
@@ -18,13 +17,4 @@ export type AlphabetListProps = {
 // Ensure that alphabetJson is an array of Alphabet objects
 let alphabet: Alphabet[] = alphabetJson as Alphabet[];
 
-// Map over alphabetJson to add romanisation fields
-alphabet = alphabet.map((letter: Alphabet) => {
-    let romanisation;
-
-    if (letter.hangul && typeof letter.hangul === 'string') {
-        romanisation = hangulRomanization.convert(letter.hangul);
-    }
-
-    return { ...letter, romanisation };
-});
+export default alphabet;

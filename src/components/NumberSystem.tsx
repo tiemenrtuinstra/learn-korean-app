@@ -24,11 +24,10 @@ const NumberSystem: React.FC<NumbersListProps> = ({ numbers, page, rowsPerPage, 
                 <Table sx={{ maxWidth: 800, margin: "auto" }}>
                     <TableHead>
                         <TableRow>
-
-                            <TableCell align="center" sx={{ width: '1%', fontWeight: "bold", color: "primary.main" }}>Number</TableCell>
-                            <TableCell align="left" sx={{ fontWeight: "bold", color: "primary.main" }}>Hangul</TableCell>
-                            <TableCell align="left" sx={{ fontWeight: "bold", color: "primary.main" }}>Romanisation</TableCell>
-                            <TableCell align="center" sx={{ width: '1%', fontWeight: "bold", color: "primary.main" }}>Listen</TableCell>
+                            <TableCell align="center" sx={{ width: '1%', fontWeight: "bold" }}>Number</TableCell>
+                            <TableCell align="left" sx={{ fontWeight: "bold" }}>한글</TableCell>
+                            <TableCell align="left" sx={{ fontWeight: "bold" }}>Romanisation</TableCell>
+                            <TableCell align="center" sx={{ width: '1%', fontWeight: "bold" }}>Listen</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>

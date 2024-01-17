@@ -1,8 +1,7 @@
 // TableCellComponents.tsx
 import React from "react";
-import { TableCell, IconButton } from "@mui/material";
-import VolumeUpIcon from "@mui/icons-material/VolumeUp";
-import { Word } from "../Words";
+import { IconButton, Popover, TableCell, Typography } from "@mui/material";
+import { SpeakButton } from "./SpeakButton";
 
 export const ListenCell = ({
   text,
@@ -11,19 +10,8 @@ export const ListenCell = ({
   text: string | null;
   lang: string;
 }) => (
-  <TableCell align="right">
-    {text && (
-      <IconButton
-        onClick={() => {
-          const speech = new SpeechSynthesisUtterance();
-          speech.text = text;
-          speech.lang = lang;
-          window.speechSynthesis.speak(speech);
-        }}
-      >
-        <VolumeUpIcon />
-      </IconButton>
-    )}
+  <TableCell align="center">
+    <SpeakButton text={text} lang={lang} />
   </TableCell>
 );
 
