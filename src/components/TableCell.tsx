@@ -10,7 +10,7 @@ export const ListenCell = ({
   text: string | null;
   lang: string;
 }) => (
-  <TableCell align="center">
+  <TableCell align="center" style={{width:"10px"}}>
     <SpeakButton text={text} lang={lang} />
   </TableCell>
 );

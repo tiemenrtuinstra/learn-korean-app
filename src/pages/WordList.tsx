@@ -8,6 +8,8 @@ import {
   TableRow,
   Paper,
   TablePagination,
+  Grid,
+  TableCell,
 } from "@mui/material";
 import words, { Word } from "../Words";
 import { handleSearch, SearchFilter } from "../components/SearchFilter";
@@ -69,8 +71,7 @@ const WordList = () => {
     : filteredWords.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
   return (
-    <TableContainer
-      component={Paper}
+    <TableContainer component={Paper}
       sx={{ maxWidth: 800, margin: "auto", marginTop: 2 }}
     >
       <SearchFilter
@@ -80,7 +81,7 @@ const WordList = () => {
         setFilteredWords={setFilteredWords}
         words={words}
       />
-       <Table sx={{ minWidth: 650 }}>
+      <Table>
         <TableHead>
           <TableRow>
             <LanguageHeadCell
@@ -90,20 +91,15 @@ const WordList = () => {
               sortDirection={sortDirection}
               handleSort={handleSort}
             />
-            <ListenHeadCell />
-            <LanguageHeadCell
-              language="romanisation"
-              sortField={sortField || ""}
-              sortDirection={sortDirection}
-              handleSort={handleSort}
-            />
+            <TableCell sx={{ fontWeight: "bold" }}>듣다</TableCell>
             <LanguageHeadCell
               language="dutch"
+              fieldTitle="Nederlands"
               sortField={sortField || ""}
               sortDirection={sortDirection}
               handleSort={handleSort}
             />
-            <ListenHeadCell />
+          <TableCell sx={{ fontWeight: "bold" }}>듣다</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -111,10 +107,8 @@ const WordList = () => {
             <TableRow key={index}>
               <LanguageCell word={word} field="hangul" />
               <ListenCell text={word.hangul} lang="ko" />
-              <LanguageCell word={word} field="romanisation" />
               <LanguageCell word={word} field="dutch" />
               <ListenCell text={word.dutch} lang="nl" />
-              <LanguageCell word={word} field="english" />
             </TableRow>
           ))}
         </TableBody>

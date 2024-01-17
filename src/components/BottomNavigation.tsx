@@ -21,11 +21,11 @@ export default function SimpleBottomNavigation() {
                         setValue(newValue);
                     }}
                 >
-                    <BottomNavigationAction component={Link} to="/alphabet" label="Alphabet" icon={<HangulIcon/>} />
-                    <BottomNavigationAction component={Link} to="/word-list" label="Words" icon={<WordListIcon />} />
-                    <BottomNavigationAction component={Link} to="/number-list" label="Numbers" icon={<NumberListIcon />} />
-                    <BottomNavigationAction component={Link} to="/translate" label="Translate" value="translate" icon={<TranslateIcon />} />
-                    <BottomNavigationAction component={Link} to="/exercises" label="Exercises" icon={<ExerciseIcon />} />
+                    <BottomNavigationAction component={Link} to="/alphabet" label="Alfabet" icon={<HangulIcon/>} />
+                    <BottomNavigationAction component={Link} to="/word-list" label="Woorden" icon={<WordListIcon />} />
+                    <BottomNavigationAction component={Link} to="/number-list" label="Nummers" icon={<NumberListIcon />} />
+                    <BottomNavigationAction component={Link} to="/translate" label="Vertalen" value="translate" icon={<TranslateIcon />} />
+                    <BottomNavigationAction component={Link} to="/exercises" label="Oefenining" icon={<ExerciseIcon />} />
                 </BottomNavigation>
             </Paper>
         </Box>

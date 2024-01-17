@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Table, TableBody, TableCell, TableHead, TableRow, Button, Popover, Paper, TableContainer, Select, MenuItem, Card, CardContent, Grid, Typography } from '@mui/material';
+import { Table, TableBody, TableCell, TableHead, TableRow, Button, Popover, Paper, TableContainer, Select, MenuItem, Card, CardContent, Grid, Typography, Box } from '@mui/material';
 import { ListenCell } from "../components/TableCell";
 import alphabet, { Alphabet } from '../Alphabet';
 import { SpeakButton } from '../components/SpeakButton';
@@ -42,7 +42,7 @@ function HangulAlphabet() {
                                 </Select>
                             </Grid>
                             <Grid item xs={12}>
-                                <Button onClick={() => setView(view === 'table' ? 'single' : 'table')}>
+                                <Button variant="contained" color="primary" onClick={() => setView(view === 'table' ? 'single' : 'table')}>
                                     Switch to {view === 'table' ? 'Single Letter View' : 'Table View'}
                                 </Button>
                             </Grid>
@@ -56,19 +56,21 @@ function HangulAlphabet() {
                     component={Paper}
                     sx={{ maxWidth: 800, margin: "auto", marginTop: 2 }}
                 >
-                    <Table sx={{ minWidth: 650 }}>
+                    <Table>
                         <TableHead>
                             <TableRow>
                                 <TableCell>한글</TableCell>
                                 <TableCell>Romanisation</TableCell>
-                                <TableCell>Listen</TableCell>
+                                <TableCell>Soort</TableCell>
+                                <TableCell sx={{ fontWeight: "bold" }}>듣다</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {filteredAlphabet.map((letter, index) => (
                                 <TableRow key={index}>
-                                    <TableCell>{letter.hangul}</TableCell>
+                                    <TableCell style={{ width: "65px" }}>{letter.hangul}</TableCell>
                                     <TableCell>{Array.isArray(letter.romanisation) ? letter.romanisation.join(', ') : letter.romanisation}</TableCell>
+                                    <TableCell>{letter.type}</TableCell>
                                     <ListenCell text={letter.hangul} lang="ko" />
                                 </TableRow>
                             ))}
@@ -79,11 +81,24 @@ function HangulAlphabet() {
                 <div>
                     <Card sx={{ maxWidth: 800, margin: "auto", marginTop: 2 }}>
                         <CardContent>
-                            <Typography variant="h4" align="center">{filteredAlphabet[currentLetter].hangul}</Typography>
-                            <Typography variant="h6" align="center">{filteredAlphabet[currentLetter].romanisation}</Typography>
-                            <SpeakButton text={filteredAlphabet[currentLetter].hangul} lang="ko" />
-                            <Button onClick={() => setCurrentLetter((currentLetter - 1) % filteredAlphabet.length)}>Previous Letter</Button>
-                            <Button onClick={() => setCurrentLetter((currentLetter + 1) % filteredAlphabet.length)}>Next Letter</Button>
+                            <Typography variant="h3" align="center">{filteredAlphabet[currentLetter].hangul}</Typography>
+                            <Typography variant="h5" align="center">{filteredAlphabet[currentLetter].romanisation}</Typography>
+                            <Typography align="center">{filteredAlphabet[currentLetter].type}</Typography>
+
+                            <Box
+                                component="span"
+                                m={1}
+                                display="flex"
+                                justifyContent="space-between"
+                                alignItems="center"
+
+                            >
+                                <Button variant="contained" color="primary" onClick={() => setCurrentLetter((currentLetter - 1) % filteredAlphabet.length)}>Previous Letter</Button>
+                                <SpeakButton text={filteredAlphabet[currentLetter].hangul} lang="ko" />
+                                <Button variant="contained" color="primary" onClick={() => setCurrentLetter((currentLetter + 1) % filteredAlphabet.length)}>Next Letter</Button>
+                            </Box>
+
+
                         </CardContent>
                     </Card>
                 </div>

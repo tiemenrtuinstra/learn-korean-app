@@ -77,7 +77,7 @@ export const SearchFilter: React.FC<SearchFilterProps> = ({
 
   return (
     <div>
-      <Card sx={{ marginBottom: 2 }}>
+      <Card sx={{ marginBottom: "2rem" }}>
         <CardContent>
           <form noValidate autoComplete="off">
             <Grid container spacing={2} alignItems="center">
