@@ -23,13 +23,13 @@ const NumberList = () => {
         sx={{ maxWidth: 800, margin: "auto", padding: "1rem 0px " }}>
         <Box display="flex" justifyContent="center">
           <Button
-            variant="contained"
+            variant="contained" size="medium"
             onClick={() => setSelectedSystem('korean')}
           >
             Go to Korean Numbers
           </Button>
           <Button
-            variant="contained"
+            variant="contained" size="medium"
             onClick={() => setSelectedSystem('sino-korean')}
             style={{ marginLeft: "1rem" }}
           >

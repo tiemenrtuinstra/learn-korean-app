@@ -1,7 +1,7 @@
 // TableCellComponents.tsx
 import React from "react";
 import { IconButton, Popover, TableCell, Typography } from "@mui/material";
-import { SpeakButton } from "./SpeakButton";
+import { SpeakButton } from "./Speak";
 
 export const ListenCell = ({
   text,

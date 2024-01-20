@@ -1,5 +1,5 @@
 // SearchFilter.tsx
-import React from "react";
+import React, { useState, useContext } from "react";
 import {
   SelectChangeEvent,
   TextField,
@@ -8,8 +8,10 @@ import {
   Card,
   CardContent,
   Grid,
+  Button,
 } from "@mui/material";
-import words, { Word } from "../Words";
+import words, { Word, wordSources } from "../Words";
+import WordSourceSelect from "../components/form/WordSourceSelect";
 
 interface SearchFilterProps {
   searchTerm: string;
@@ -58,7 +60,7 @@ export const SearchFilter: React.FC<SearchFilterProps> = ({
   handleSearch,
   setSearchTerm,
   setFilteredWords,
-  words,
+  words
 }) => {
   const [sourceFilter, setSourceFilter] = React.useState("");
 
@@ -77,7 +79,7 @@ export const SearchFilter: React.FC<SearchFilterProps> = ({
 
   return (
     <div>
-      <Card sx={{ marginBottom: "2rem" }}>
+      <Card className="table-filter" sx={{ maxWidth: 800, margin: "auto", marginTop: 2 }}>
         <CardContent>
           <form noValidate autoComplete="off">
             <Grid container spacing={2} alignItems="center">
@@ -85,6 +87,7 @@ export const SearchFilter: React.FC<SearchFilterProps> = ({
                 <TextField
                   label="Search"
                   variant="outlined"
+                  size="small"
                   value={searchTerm}
                   onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                     handleSearch({
@@ -99,23 +102,11 @@ export const SearchFilter: React.FC<SearchFilterProps> = ({
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
-                <Select
-                  value={sourceFilter}
-                  onChange={handleSourceChange}
-                  displayEmpty
-                  fullWidth
-                >
-                  <MenuItem value="">
-                    <em>Alle categorieen</em>
-                  </MenuItem>
-                  {Array.from(new Set(words.map((item: any) => item.source)))
-                    .sort()
-                    .map((source, index) => (
-                      <MenuItem key={index} value={source}>
-                        {source}
-                      </MenuItem>
-                    ))}
-                </Select>
+                <WordSourceSelect
+                  sourceFilter={sourceFilter}
+                  wordSources={wordSources}
+                  handleSourceChange={handleSourceChange}
+                />
               </Grid>
             </Grid>
           </form>

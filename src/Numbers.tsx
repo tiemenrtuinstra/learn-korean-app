@@ -1,6 +1,11 @@
 import numbersJson from "./database/numbers.json";
 var hangulRomanization = require("hangul-romanization");
 
+export enum NumberType {
+  Korean = "Korean",
+  SinoKorean = "SinoKorean",
+};
+
 export type Number = {
   number: number;
   korean: string;
@@ -9,12 +14,26 @@ export type Number = {
   sinoKoreanRomanisation?: string;
 };
 
+export type KoreanNumber = {
+  number: number;
+  hangul: string;
+  romanisation: string;
+  type: NumberType;
+};
+
+export type SinoKoreanNumber = {
+  number: number;
+  hangul: string;
+  romanisation: string;
+  type: NumberType;
+};
+
 export type NumberListProps = {
-    numbers: Number[];
-    page: number;
-    rowsPerPage: number;
-    handleChangePage: (event: unknown, newPage: number) => void;
-    handleChangeRowsPerPage: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  numbers: Number[];
+  page: number;
+  rowsPerPage: number;
+  handleChangePage: (event: unknown, newPage: number) => void;
+  handleChangeRowsPerPage: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 // Ensure that numbersJson is an array of Number objects
@@ -38,5 +57,23 @@ numbers = numbers.map((number: Number) => {
     sinoKoreanRomanisation,
   };
 });
+
+export const koreanNumbers: KoreanNumber[] = numbers
+  .filter((number: Number) => number.number <= 100)
+  .map((number: Number) => ({
+    number: number.number,
+    hangul: number.korean,
+    romanisation: number.koreanRomanisation || '',
+    type: NumberType.Korean,
+  }));
+
+
+export const sinoKoreanNumbers: SinoKoreanNumber[] = numbers.map((number: Number) => ({
+  number: number.number,
+  hangul: number.sinoKorean,
+  romanisation: number.sinoKoreanRomanisation || '',
+  type: NumberType.SinoKorean,
+}));
+
 
 export default numbers;

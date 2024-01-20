@@ -1,5 +1,5 @@
 // WordList.tsx
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   Table,
   TableBody,
@@ -10,17 +10,23 @@ import {
   TablePagination,
   Grid,
   TableCell,
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Typography,
 } from "@mui/material";
 import words, { Word } from "../Words";
 import { handleSearch, SearchFilter } from "../components/SearchFilter";
 import { LanguageCell, ListenCell } from "../components/TableCell";
 import { LanguageHeadCell, ListenHeadCell } from "../components/TableHeadCell";
+import { SpeakButton } from "../components/Speak";
 
 const WordList = () => {
+  const [currentWord, setCurrentWord] = useState(0);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [showAll, setShowAll] = useState(false);
-
   // Add state for sorting
   const [sortField, setSortField] = React.useState<keyof Word | null>("hangul");
   const [sortDirection, setSortDirection] = React.useState<"asc" | "desc">(
@@ -48,7 +54,8 @@ const WordList = () => {
   };
 
   // Assuming words is an array of Word objects and you want to sort by the 'english' field
-  const sortedWords = words.sort((a, b) => {
+
+  const sortedWords = [...filteredWords].sort((a, b) => {
     if (!sortField) {
       return 0;
     }
@@ -67,13 +74,12 @@ const WordList = () => {
   });
 
   const paginatedWords = showAll
-    ? filteredWords
-    : filteredWords.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+    ? sortedWords
+    : sortedWords.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
   return (
-    <TableContainer component={Paper}
-      sx={{ maxWidth: 800, margin: "auto", marginTop: 2 }}
-    >
+
+    <div>
       <SearchFilter
         searchTerm={searchTerm}
         handleSearch={handleSearch}
@@ -81,52 +87,55 @@ const WordList = () => {
         setFilteredWords={setFilteredWords}
         words={words}
       />
-      <Table>
-        <TableHead>
-          <TableRow>
-            <LanguageHeadCell
-              language="hangul"
-              fieldTitle="한글"
-              sortField={sortField || ""}
-              sortDirection={sortDirection}
-              handleSort={handleSort}
-            />
-            <TableCell sx={{ fontWeight: "bold" }}>듣다</TableCell>
-            <LanguageHeadCell
-              language="dutch"
-              fieldTitle="Nederlands"
-              sortField={sortField || ""}
-              sortDirection={sortDirection}
-              handleSort={handleSort}
-            />
-          <TableCell sx={{ fontWeight: "bold" }}>듣다</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {paginatedWords.map((word, index) => (
-            <TableRow key={index}>
-              <LanguageCell word={word} field="hangul" />
-              <ListenCell text={word.hangul} lang="ko" />
-              <LanguageCell word={word} field="dutch" />
-              <ListenCell text={word.dutch} lang="nl" />
+      <TableContainer component={Paper}
+        sx={{ maxWidth: 800, margin: "auto", marginTop: 2 }}
+      >
+
+        <Table className="wordlist-table">
+          <TableHead>
+            <TableRow>
+              <LanguageHeadCell
+                language="hangul"
+                fieldTitle="한글"
+                sortField={sortField ? sortField.toString() : ""}
+                sortDirection={sortDirection}
+                handleSort={handleSort}
+              />
+              <TableCell sx={{ fontWeight: "bold" }}>듣다</TableCell>
+              <LanguageHeadCell
+                language="dutch"
+                fieldTitle="Nederlands"
+                sortField={sortField || ""}
+                sortDirection={sortDirection}
+                handleSort={handleSort}
+              />
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-      <TablePagination
-        rowsPerPageOptions={[1, 5, 10, 25, filteredWords.length]}
-        component="div"
-        count={filteredWords.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-        labelRowsPerPage="Rows per page:"
-        labelDisplayedRows={({ from, to, count }) =>
-          `${from}-${to === -1 ? "All" : to} of ${count}`
-        }
-      />
-    </TableContainer>
+          </TableHead>
+          <TableBody>
+            {paginatedWords.map((word, index) => (
+              <TableRow key={index}>
+                <LanguageCell word={word} field="hangul" />
+                <ListenCell text={word.hangul} lang="ko" />
+                <LanguageCell word={word} field="dutch" />
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+
+        <TablePagination
+          rowsPerPageOptions={filteredWords.length > 10 ? [1, 5, 10, 25, filteredWords.length] : []}
+          component="div"
+          count={filteredWords.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+          labelRowsPerPage="Aantal"
+
+        />
+      </TableContainer>
+
+    </div>
   );
 };
 

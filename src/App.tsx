@@ -1,19 +1,15 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import './App.scss';
-import Introduction from './pages/Introduction';
-import HangulAlphabet from './pages/HangulAlphabet';
-import WordList from './pages/WordList';
-import NumberList from './pages/NumberList';
-import MultipleChoice from './pages/MultipleChoice';
-import Exercise from './pages/Exercise';
-import WritingExercise from './pages/WritingExercise';
-import SpeakingExercise from './pages/SpeakingExercise';
-import FillInTheBlanks from './pages/FillInTheBlanks';
-import Translator from './pages/Translator';
+import { BrowserRouter as Router, Route, Routes, useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import React, { useState, useContext } from "react";
+
+import RoutesOptions, { RouteOption } from "./Routes";
 import Navigation from './components/Navigation';
 import BottomNavigation from './components/BottomNavigation';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import TranslationPage from './pages/Translator';
+
+
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+
+import './scss/App.scss';
 
 enum Colors {
   Yellow = '#F7D619',
@@ -33,7 +29,14 @@ const theme = createTheme({
     },
     secondary: {
       main: Colors.Secondary,
-    },    
+    },
+    text: {
+      primary: Colors.Black,
+      secondary: Colors.Black,
+    },
+    background: {
+      default: Colors.White,
+    },
   },
   components: {
     MuiTableSortLabel: {
@@ -54,35 +57,32 @@ const theme = createTheme({
           }
         },
         icon: {
-          color: "white"
+          color: Colors.White
         }
       }
     }
   }
 });
 
+
 const App = () => {
+
   return (
-    <ThemeProvider theme={theme}>
-      <Router>
-        <Navigation />
-        <section id="content">
-        <Routes>
-          <Route path="/" element={<Introduction />} />
-          <Route path="/alphabet" element={<HangulAlphabet />} />
-          <Route path="/word-list" element={<WordList />} />
-          <Route path="/number-list" element={<NumberList />} />
-          <Route path="/translate" element={<Translator />} />
-          <Route path="/multiple-choice" element={<MultipleChoice />} />
-          <Route path="/exercise" element={<Exercise />} />
-          <Route path="/writing" element={<WritingExercise />} />
-          <Route path="/speaking" element={<SpeakingExercise />} />
-          <Route path="/fill-in-the-blanks" element={<FillInTheBlanks />} />
-        </Routes>
-        </section>
-        <BottomNavigation />
-      </Router>
-    </ThemeProvider>
+    <div>
+      <ThemeProvider theme={theme}>
+        <Router>
+          <Navigation/>
+          <section id="content">
+            <Routes>
+              {RoutesOptions.filter((route: { enabled: any; }) => route.enabled).map((route: RouteOption) => (
+                <Route path={route.path} element={route.element} />
+              ))}
+            </Routes>
+          </section>
+          <BottomNavigation />
+        </Router>
+      </ThemeProvider>
+    </div >
   );
 }
 

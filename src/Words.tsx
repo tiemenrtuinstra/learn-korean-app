@@ -5,8 +5,12 @@ export type Word = {
   hangul: string;
   romanisation?: string;
   dutch: string;
-  english?: string;
   source: string;
+};
+
+export type WordSource = {
+  id: number;
+  value: string;
 };
 
 // Ensure that wordsJson is an array of Word objects
@@ -18,4 +22,10 @@ words = words.map((word: Word) => ({
   romanisation: hangulRomanization.convert(word.hangul as string),
 }));
 
+export const wordSources: WordSource[] = words.reduce((unique, item) => {
+  if (!unique.some(obj => obj.value === item.source)) {
+    unique.push({ id: unique.length, value: item.source });
+  }
+  return unique;
+}, [] as WordSource[]).sort((a, b) => a.value.localeCompare(b.value));
 export default words;

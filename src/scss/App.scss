@@ -1,0 +1,64 @@
+@import "./Palette.scss";
+
+body {
+  background-color: #e3e3e3 !important;
+  section#content {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+}
+
+.mui-active {
+  .MuiTableSortLabel-icon {
+    color: var(--secondary-color);
+  }
+}
+.MuiPaper-root {
+  &.table-filter {
+    .MuiCardContent-root {
+      padding: 16px;
+    }
+  }
+}
+
+table {
+  thead {
+    background-color: var(--yellow);
+  }
+  &.alphabet-table {
+    tr {
+      th:nth-child(4) {
+        width: 165px;
+        white-space: nowrap;
+      }
+    }
+  }
+  &.wordlist-table {
+    tr {
+      th:nth-child(1) {
+        width: 40%;
+      }
+      th:nth-child(3) {
+        width: 50%;
+      }
+    }
+  }
+  &.number-table {
+    th:nth-child(1) {
+      width: 10px;
+    }
+  }
+}
+
+.speak-card.MuiCard-root {
+  &:hover,
+  &:focus,
+  &:active {
+    box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
+  }
+  .MuiButtonBase-root {
+    width: 100%;
+    color: var(--secondary-color);
+  }
+}
