@@ -15,6 +15,7 @@ import { useLocation } from 'react-router-dom';
 import headerImage from '../assets/header.jpeg'; // replace with your actual path
 import { title } from "process";
 import NavDrawer from "./NavDrawer";
+import { isAnyRouteInDrawerEnabled } from "../Routes";
 interface HeaderProps {
   title: string;
 }
@@ -29,24 +30,33 @@ const Navigation = () => {
   };
   return (
     <div>
-      <AppBar position="static" style={{ marginBottom: "20px" }}>
-        <Toolbar style={{ height: "150px", backgroundImage: `url(${headerImage})`, backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center" }}>
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            onClick={handleDrawerToggle} // Add this line
-          >
-            <MenuIcon />
-          </IconButton>
-          <NavDrawer open={drawerOpen} onClose={handleDrawerToggle} />
+      <AppBar className={"app-toolbar"} sx={{ position: 'fixed', top: 7, left: 7, right: 7 }}>
+        <Toolbar >
+
+          {isAnyRouteInDrawerEnabled() === true && (
+            <>
+              <IconButton
+                edge="start"
+                color="inherit"
+                aria-label="menu"
+                onClick={handleDrawerToggle} // Add this line
+              >
+                <MenuIcon />
+              </IconButton>
+              <NavDrawer open={drawerOpen} onClose={handleDrawerToggle} />
+
+            </>
+          )}
           <img
             src={koreanFlag}
             alt="Korean Flag"
             style={{ height: "40px", marginRight: "8px" }}
           />
-          <Typography variant="h3">
-            Learn 한국
+          <Typography color={"primary"}  variant="h3">
+            Learn
+          </Typography>
+          <Typography color={"secondary"} variant="h4">
+            &nbsp;한국
           </Typography>
         </Toolbar>
       </AppBar>

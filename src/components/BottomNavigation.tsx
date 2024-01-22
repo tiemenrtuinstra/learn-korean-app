@@ -16,7 +16,7 @@ export default function TabBottomNavigation() {
     return (
         <Box sx={{ pb: 7 }}>
             <CssBaseline />
-            <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
+            <Paper sx={{ position: 'fixed', bottom: 7, left: 7, right: 7 }} elevation={3}>
                 <BottomNavigation
                     showLabels
                     value={value}
@@ -25,8 +25,8 @@ export default function TabBottomNavigation() {
                     }}
                 >
                     {RoutesOptions.filter((route: { inBottomNav: boolean; }) => route.inBottomNav).map((route: RouteOption) => (
-                        <BottomNavigationAction
-                            label={route.title}
+                        <BottomNavigationAction sx={{ minWidth: "40px" }}
+                            // label={route.title}
                             icon={route.icon}
                             component={Link}
                             to={route.path}

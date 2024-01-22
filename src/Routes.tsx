@@ -5,11 +5,11 @@ import HangulAlphabet from './pages/HangulAlphabet';
 import WordList from './pages/WordList';
 import WordCards from './pages/WordCards';
 import NumberList from './pages/NumberList';
-import MultipleChoice from './pages/MultipleChoice';
-import Exercise from './pages/Exercise';
-import WritingExercise from './pages/WritingExercise';
-import SpeakingExercise from './pages/SpeakingExercise';
-import FillInTheBlanks from './pages/FillInTheBlanks';
+import MultipleChoice from './Excercises/MultipleChoice';
+import Exercise from './Excercises/Exercise';
+import WritingExercise from './Excercises/WritingExercise';
+import SpeakingExercise from './Excercises/SpeakingExercise';
+import FillInTheBlanks from './Excercises/FillInTheBlanks';
 import Translator from './pages/Translator';
 
 
@@ -24,7 +24,7 @@ import FillIcon from '@mui/icons-material/FormatColorFill';
 import FinishedIcon from '@mui/icons-material/CheckCircleOutline';
 import NumberListIcon from '@mui/icons-material/Filter1';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
-import FinishedPage from './pages/FinishedPage';
+import FinishedPage from './Excercises/FinishedPage';
 import HangulIcon from './assets/HangulIcon';
 import React from 'react';
 
@@ -41,27 +41,27 @@ export type RouteOption = {
 
 
 const FinishedPageWrapper: React.FC = () => {
-  const { correctAnswers, wrongAnswers } = useParams();
-  return <FinishedPage correctAnswers={Number(correctAnswers)} wrongAnswers={Number(wrongAnswers)} />;
+  const { score, correctAnswers, wrongAnswers } = useParams();
+  return <FinishedPage score={Number(score)} correctAnswers={Number(correctAnswers)} wrongAnswers={Number(wrongAnswers)} />;
 };
 
 export const RoutesOptions: RouteOption[] = [
-  { path: "/", title: "Introduction", element: <Introduction />, inBottomNav: true, inDrawer: false, isExercise: false, icon: <HomeIcon />, enabled: true },
-  { path: "/Alfabet", title: "Alfabet", element: <HangulAlphabet />, inBottomNav: false, inDrawer: true, isExercise: false, icon: <HangulIcon />, enabled: true },
-  { path: "/woorden-lijst", title: "Woordenlijst", element: <WordList />, inBottomNav: false, inDrawer: true, isExercise: false, icon: <ListIcon />, enabled: true },
+  { path: "/", title: "Introduction", element: <Introduction />, inBottomNav: false, inDrawer: false, isExercise: false, icon: <HomeIcon />, enabled: true },
+  { path: "/Alfabet", title: "Alfabet", element: <HangulAlphabet />, inBottomNav: true, inDrawer: false, isExercise: false, icon: <HangulIcon />, enabled: true },
+  { path: "/woorden-lijst", title: "Woordenlijst", element: <WordList />, inBottomNav: true, inDrawer: false, isExercise: false, icon: <ListIcon />, enabled: true },
   { path: "/woorden-kaarten", title: "Flashcards", element: <WordCards />, inBottomNav: true, inDrawer: false, isExercise: false, icon: <CreditCardIcon />, enabled: true },
-  { path: "/nummers", title: "Nummers", element: <NumberList />, inBottomNav: false, inDrawer: true, isExercise: false, icon: <NumberListIcon />, enabled: true },
+  { path: "/nummers", title: "Nummers", element: <NumberList />, inBottomNav: true, inDrawer: false, isExercise: false, icon: <NumberListIcon />, enabled: true },
   { path: "/vertaler", title: "Vertalen", element: <Translator />, inBottomNav: true, inDrawer: false, isExercise: false, icon: <TranslateIcon />, enabled: true },
   { path: "/oefeningen", title: "oefeningen", element: <Exercise />, inBottomNav: true, inDrawer: false, isExercise: false, icon: <ExerciseIcon />, enabled: true },
   { path: "/multiple-choice", title: "Multiple Choice", element: <MultipleChoice />, inBottomNav: false, inDrawer: false, isExercise: true, icon: <MultipleChoiceIcon />, enabled: true },
   { path: "/schrijven", title: "Writing Exercise", element: <WritingExercise />, inBottomNav: false, inDrawer: false, isExercise: true, icon: <WritingIcon />, enabled: true },
   { path: "/spreken", title: "Speaking Exercise", element: <SpeakingExercise />, inBottomNav: false, inDrawer: false, isExercise: true, icon: <SpeakingIcon />, enabled: true },
   { path: "/invullen", title: "Fill in The Blanks", element: <FillInTheBlanks />, inBottomNav: false, inDrawer: false, isExercise: true, icon: <FillIcon />, enabled: true },
-  { path: "/finished/:correctAnswers/:wrongAnswers", title: "Finished Page", element: <FinishedPageWrapper />, inBottomNav: false, inDrawer: false, isExercise: false, icon: <FinishedIcon />, enabled: true },
+  { path: "/finished/:score/:correctAnswers/:wrongAnswers", title: "Finished Page", element: <FinishedPageWrapper />, inBottomNav: false, inDrawer: false, isExercise: false, icon: <FinishedIcon />, enabled: true },
 ].filter(route => route.enabled);
 
 export default RoutesOptions;
 
-function useState(arg0: boolean): [any, any] {
-  throw new Error('Function not implemented.');
+export function isAnyRouteInDrawerEnabled(): boolean {
+  return RoutesOptions.some(route => route.inDrawer);
 }

@@ -7,7 +7,7 @@ import Navigation from './components/Navigation';
 import BottomNavigation from './components/BottomNavigation';
 
 
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { ThemeProvider, createTheme, makeStyles } from '@mui/material/styles';
 
 import './scss/App.scss';
 
@@ -68,7 +68,7 @@ const theme = createTheme({
 const App = () => {
 
   return (
-    <div>
+    <div className={"app-wrapper"}>
       <ThemeProvider theme={theme}>
         <Router>
           <Navigation/>
