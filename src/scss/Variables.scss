@@ -1,0 +1,111 @@
+$amount: 10%; // Adjust this to get the desired lightness/darkness
+
+$blue: #0047A0;
+$blue-light: lighten($blue, $amount);
+$blue-dark: darken($blue, $amount);
+$blue-card-bg: rgba($blue, 0.4);
+
+$red: #CD2E3A;
+$red-light: lighten($red, $amount);
+$red-dark: darken($red, $amount);
+$red-card-bg: rgba($red, 0.4);
+
+$yellow: #F7D619;
+$yellow-light: lighten($yellow, $amount);
+$yellow-dark: darken($yellow, $amount);
+$yellow-card-bg: rgba($yellow, 0.4);
+
+$green: #00A651;
+$green-light: lighten($green, $amount);
+$green-dark: darken($green, $amount);
+$green-card-bg: rgba($green, 0.4);
+
+$black: #000000;
+$black-light: lighten($black, $amount);
+$black-dark: darken($black, $amount);
+$black-card-bg: rgba($black, 0.4);
+
+$white: #FFFFFF;
+$white-light: lighten($white, $amount);
+$white-dark: darken($white, $amount);
+$white-card-bg: rgba($white, 0.4);
+
+$grey: #808080;
+$grey-light: lighten($grey, $amount);
+$grey-dark: darken($grey, $amount);
+$grey-card-bg: rgba($grey, 0.4);
+
+$primary-color: $blue;
+$primary-color-light: $blue-light;
+$primary-color-dark: $blue-dark;
+$primary-color-card-bg: $blue-card-bg;
+
+$secondary-color: $red;
+$secondary-color-light: $red-light;
+$secondary-color-dark: $red-dark;
+$secondary-color-card-bg: $red-card-bg;
+
+$tertiary-color: $yellow;
+$tertiary-color-light: $yellow-light;
+$tertiary-color-dark: $yellow-dark;
+$tertiary-color-card-bg: $yellow-card-bg;
+
+$quaternary-color: $green;
+$quaternary-color-light: $green-light;
+$quaternary-color-dark: $green-dark;
+$quaternary-color-card-bg: $green-card-bg;
+
+$quinary-color: $black;
+$quinary-color-light: $black-light;
+$quinary-color-dark: $black-dark;
+$quinary-color-card-bg: $black-card-bg;
+
+$success: $green;
+$success-light: $green-light;
+$success-dark: $green-dark;
+$success-card-bg: $green-card-bg;
+
+$error: $red;
+$error-light: $red-light;
+$error-dark: $red-dark;
+$error-card-bg: $red-card-bg;
+
+$warning: $yellow;
+$warning-light: $yellow-light;
+$warning-dark: $yellow-dark;
+$warning-card-bg: $yellow-card-bg;
+
+$info: $blue;
+$info-light: $blue-light;
+$info-dark: $blue-dark;
+$info-card-bg: $blue-card-bg;
+
+:root{
+  --blue: #0047A0;
+  --red: #CD2E3A;
+  --yellow: #F7D619;
+  --green: #00A651;
+  --black: #000000;
+  --white: #FFFFFF;
+  --grey: #808080;
+  --primary-color: var(--blue);
+  --secondary-color: var(--red);
+  --tertiary-color: var(--yellow);
+  --quaternary-color: var(--green);
+  --quinary-color: var(--black);
+}
+
+@mixin alert-style($color, $dark-color, $card-bg-color) {
+  border: 2px solid $dark-color !important;
+  box-shadow: 0px 2px 1px -1px $dark-color,
+    0px 1px 1px 0px rgba(0, 0, 0, 0.14), 
+    0px 1px 3px 0px $dark-color !important;
+  background-color: $card-bg-color !important;
+  color: $color !important;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&family=Noto+Serif+KR&display=swap');
+
+$font-family-kr: 'Noto Sans KR', sans-serif;
+$font-family-kr-serif: 'Noto Serif KR', serif;
+

@@ -7,61 +7,71 @@ import Navigation from './components/Navigation';
 import BottomNavigation from './components/BottomNavigation';
 
 
-import { ThemeProvider, createTheme, makeStyles } from '@mui/material/styles';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 import './scss/App.scss';
 
-enum Colors {
-  Yellow = '#F7D619',
-  Black = '#000000',
-  White = '#FFFFFF',
-  Blue = '#0047A0',
-  Red = '#CD2E3A',
-  Primary = '#0047A0', // primary-color is blue
-  Secondary = '#CD2E3A', // secondary-color is red
-  Tertiary = '#F7D619', // tertiary-color is yellow
+const blue = getComputedStyle(document.documentElement).getPropertyValue('--blue').trim();
+const red = getComputedStyle(document.documentElement).getPropertyValue('--red').trim();
+const green = getComputedStyle(document.documentElement).getPropertyValue('--green').trim();
+const yellow = getComputedStyle(document.documentElement).getPropertyValue('--yellow').trim();
+const black = getComputedStyle(document.documentElement).getPropertyValue('--black').trim();
+const white = getComputedStyle(document.documentElement).getPropertyValue('--white').trim();
+const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--primary-color').trim();
+const secondaryColor = getComputedStyle(document.documentElement).getPropertyValue('--secondary-color').trim();
+
+export const Colors = {
+  Blue: blue,
+  Red: red,
+  Green: green,
+  Yellow: yellow,
+  Black: black,
+  White: white,
+  Primary: primaryColor,
+  Secondary: secondaryColor
 }
+console.log(Colors);
 
 const theme = createTheme({
-  palette: {
-    primary: {
+      palette: {
+        primary: {
       main: Colors.Primary,
-    },
-    secondary: {
+        },
+        secondary: {
       main: Colors.Secondary,
-    },
-    text: {
+        },
+        text: {
       primary: Colors.Black,
       secondary: Colors.Black,
-    },
-    background: {
+        },
+        background: {
       default: Colors.White,
-    },
-  },
-  components: {
-    MuiTableSortLabel: {
-      styleOverrides: {
-        root: {
+        },
+      },
+      components: {
+        MuiTableSortLabel: {
+          styleOverrides: {
+            root: {
           color: Colors.Black,
-          "&:hover": {
+              "&:hover": {
             color: Colors.Black
-          },
-          "&.Mui-active": {
-            "&&": {
+              },
+              "&.Mui-active": {
+                "&&": {
               color: Colors.Primary,
 
-              "& * ": {
+                  "& * ": {
                 color: Colors.Secondary,
+                  }
+                }
               }
-            }
-          }
-        },
-        icon: {
+            },
+            icon: {
           color: Colors.White
         }
+            }
+          }
       }
-    }
-  }
 });
 
 
@@ -71,7 +81,7 @@ const App = () => {
     <div className={"app-wrapper"}>
       <ThemeProvider theme={theme}>
         <Router>
-          <Navigation/>
+          <Navigation />
           <section id="content">
             <Routes>
               {RoutesOptions.filter((route: { enabled: any; }) => route.enabled).map((route: RouteOption) => (

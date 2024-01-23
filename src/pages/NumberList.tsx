@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Box, Card, Paper } from '@mui/material';
+import { Button, Box, Card, Paper, Grid } from '@mui/material'; // Import the Grid component
 import numbers, { Number, NumberListProps } from '../Numbers';
 import NumberSystem from '../components/NumberSystem';
 
@@ -21,21 +21,26 @@ const NumberList = () => {
     <div>
       <Card component={Paper}
         sx={{ maxWidth: 800, margin: "auto", padding: "1rem 0px " }}>
-        <Box display="flex" justifyContent="center">
-          <Button
-            variant="contained" size="medium"
-            onClick={() => setSelectedSystem('korean')}
-          >
-            Go to Korean Numbers
-          </Button>
-          <Button
-            variant="contained" size="medium"
-            onClick={() => setSelectedSystem('sino-korean')}
-            style={{ marginLeft: "1rem" }}
-          >
-            Go to Sino-Korean Numbers
-          </Button>
-        </Box>
+        <Grid container justifyContent="center" spacing={2} style={{ padding: '0px 14px' }}>
+          <Grid item sm={6} xs={12}>
+            <Button
+              variant="contained" size="medium"
+              style={{ width: "100%" }}
+              onClick={() => setSelectedSystem('korean')}
+            >
+              Koreaans
+            </Button>
+          </Grid>
+          <Grid item sm={6} xs={12}>
+            <Button
+              variant="contained" size="medium"
+              onClick={() => setSelectedSystem('sino-korean')}
+              style={{ width: "100%" }}
+            >
+              Sino-Koreans
+            </Button>
+          </Grid>
+        </Grid>
       </Card>
 
       {numbers &&

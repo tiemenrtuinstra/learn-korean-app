@@ -30,8 +30,8 @@ const Navigation = () => {
   };
   return (
     <div>
-      <AppBar className={"app-toolbar"} sx={{ position: 'fixed', top: 7, left: 7, right: 7 }}>
-        <Toolbar >
+      <AppBar className={"app-toolbar"} sx={{ position: 'fixed', top: 7, left: 7, right: 7,}}>
+        <Toolbar sx={{margin:'0px auto'}}>
 
           {isAnyRouteInDrawerEnabled() === true && (
             <>
@@ -52,7 +52,7 @@ const Navigation = () => {
             alt="Korean Flag"
             style={{ height: "40px", marginRight: "8px" }}
           />
-          <Typography color={"primary"}  variant="h3">
+          <Typography color={"primary"} variant="h3">
             Learn
           </Typography>
           <Typography color={"secondary"} variant="h4">

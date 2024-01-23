@@ -22,7 +22,7 @@ const AlertBox: React.FC<AlertBoxProps> = ({ open, type, message, onClose }) => 
   return (
     <Snackbar open={openSnackbar} autoHideDuration={3000} onClose={onClose}>
       <Alert severity={type} onClose={onClose}>
-        {message}
+        {message} test hallo
       </Alert>
     </Snackbar>
   );

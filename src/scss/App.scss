@@ -1,4 +1,17 @@
-@import "./Palette.scss";
+@import "./Variables.scss";
+* {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5;
+  letter-spacing: 0.00938em;
+}
+
+.hangulFont {
+  font-family: $font-family-kr-serif !important;
+}
 
 body {
   display: flex;
@@ -13,7 +26,7 @@ body {
   background-color: #e3e3e3 !important;
   section#content {
     margin: auto;
-    margin-top:85px;
+    margin-top: 85px;
     padding-left: 0.5rem;
     padding-right: 0.5rem;
     padding-bottom: 0.5rem;
@@ -29,16 +42,64 @@ body {
     color: var(--secondary-color);
   }
 }
+
+.text {
+  display: inline;
+  &.text-primary {
+    color: $primary-color !important;
+  }
+  &.text-secondary {
+    color: $secondary-color !important;
+  }
+  &.text-tertiary {
+    color: $tertiary-color !important;
+  }
+  &.text-quaternary {
+    color: $quaternary-color !important;
+  }
+  &.text-quinary {
+    color: $quinary-color !important;
+  }
+  &.text-error {
+    color: $error !important;
+  }
+  &.text-warning {
+    color: $warning !important;
+  }
+  &.text-info {
+    color: $info !important;
+  }
+  &.text-success {
+    color: $success !important;
+  }
+}
+
 .MuiPaper-root {
-  background-color: rgba(
-    255,
-    255,
-    255,
-    0.4
-  ) !important; // Semi-transparent white
+  background-color: $white-card-bg !important;
   backdrop-filter: blur(
     10px
   ) !important; // Apply a blur effect to the content behind the element
+
+  &.alert {
+    margin: 14px 0px;
+    p {
+      padding: 0px;
+      margin: 0px;
+    }
+    &.alert-error {
+      @include alert-style($error, $error-dark, $error-card-bg);
+    }
+    &.alert-warning {
+      @include alert-style($warning, $warning-dark, $warning-card-bg);
+    }
+    &.alert-info {
+      @include alert-style($info, $info-dark, $info-card-bg);
+    }
+    &.alert-success {
+      @include alert-style($success, $success-dark, $success-card-bg);
+    }
+  }
+
   &.table-filter {
     .MuiCardContent-root {
       padding: 16px;
@@ -46,6 +107,14 @@ body {
   }
   .MuiBottomNavigation-root {
     background-color: transparent;
+  }
+  &.MuiCard-root {
+    .MuiCardContent-root {
+      h4 {
+        text-transform: uppercase;
+        font-weight: 600;
+      }
+    }
   }
 }
 
@@ -86,6 +155,72 @@ table {
   }
   .MuiButtonBase-root {
     width: 100%;
-    color: var(--secondary-color);
+    color: $white !important;
+    background-color: $primary-color-card-bg !important;
+    font-weight: 700 !important;
+  }
+}
+
+.MuiCard-root {
+  &:hover,
+  &:focus,
+  &:active {
+    box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
+  }
+  .MuiButtonBase-root {
+    &.MuiButton-containedPrimary {
+      color: $white !important;
+      background-color: $primary-color-card-bg !important;
+      font-weight: 700 !important;
+    }
+  }
+}
+
+.flip-card {
+  perspective: 1000px;
+  width: 500px;
+  max-width: calc(100vw - 14px);
+  height: 190px;
+}
+
+.flip-card .card-front,
+.flip-card .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  transition: transform 0.6s;
+}
+
+.flip-card .card-front {
+  transform: rotateY(0deg);
+}
+
+.flip-card .card-back {
+  transform: rotateY(-180deg);
+  -webkit-transform: rotateY(-180deg);
+  -moz-transform: rotateY(-180deg);
+  -ms-transform: rotateY(-180deg);
+  -o-transform: rotateY(-180deg);
+}
+
+.flip-card.flipped .card-front {
+  transform: rotateY(-180deg);
+  background: transparent;
+}
+
+.flip-card.flipped .card-back {
+  transform: rotateY(0deg);
+  background: transparent;
+}
+
+.card-navigation {
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  padding: 0px;
+  .MuiCardContent-root {
+    padding: 0px !important;
+    margin: 0px;
   }
 }

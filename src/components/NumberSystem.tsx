@@ -2,9 +2,9 @@ import React from 'react';
 import { Number, NumberListProps } from '../Numbers';
 import {
     Table, TableBody, TableCell, TableHead, TableContainer, TablePagination,
-    TableRow, Paper, Card, CardHeader,
+    TableRow, Card, CardHeader,
 } from '@mui/material';
-import { ListenCell } from './TableCell';
+import { ListenCell,ListenHeadCell } from './TableCell';
 
 type NumbersListProps = NumberListProps & {
     numberSystem: 'korean' | 'sino-korean';
@@ -18,7 +18,6 @@ const NumberSystem: React.FC<NumbersListProps> = ({ numbers, page, rowsPerPage, 
         <Card sx={{ maxWidth: 800, margin: "auto", marginTop: 2 }}>
             <CardHeader title={numberSystem === 'korean' ? 'Korean Numbers' : 'Sino-Korean Numbers'} />
             <TableContainer
-                component={Paper}
                 sx={{ maxWidth: 800, margin: "auto" }}
             >
                 <Table sx={{ maxWidth: 800, margin: "auto" }} className="number-table">
@@ -26,8 +25,8 @@ const NumberSystem: React.FC<NumbersListProps> = ({ numbers, page, rowsPerPage, 
                         <TableRow>
                             <TableCell align="center" sx={{ fontWeight: "bold" }}>Number</TableCell>
                             <TableCell align="left" sx={{ fontWeight: "bold" }}>한글</TableCell>
-                            <TableCell align="left" sx={{ fontWeight: "bold" }}>Romanisation</TableCell>
-                            <TableCell align="center" sx={{ fontWeight: "bold" }}>듣다</TableCell>
+                            <TableCell align="left" sx={{ fontWeight: "bold" }}>Romanisation</TableCell>              
+                            <ListenHeadCell/>
                         </TableRow>
                     </TableHead>
                     <TableBody>

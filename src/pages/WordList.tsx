@@ -1,5 +1,5 @@
 // WordList.tsx
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import {
   Table,
   TableBody,
@@ -8,19 +8,11 @@ import {
   TableRow,
   Paper,
   TablePagination,
-  Grid,
   TableCell,
-  Box,
-  Button,
-  Card,
-  CardContent,
-  Typography,
 } from "@mui/material";
 import words, { Word } from "../Words";
 import { handleSearch, SearchFilter } from "../components/SearchFilter";
-import { LanguageCell, ListenCell } from "../components/TableCell";
-import { LanguageHeadCell, ListenHeadCell } from "../components/TableHeadCell";
-import { SpeakButton } from "../components/Speak";
+import { LanguageCell, ListenCell,LanguageHeadCell, ListenHeadCell  } from "../components/TableCell";
 
 const WordList = () => {
   const [currentWord, setCurrentWord] = useState(0);
@@ -79,7 +71,7 @@ const WordList = () => {
 
   return (
 
-    <div>
+    <div style={{marginBottom:'14px'}}>
       <SearchFilter
         searchTerm={searchTerm}
         handleSearch={handleSearch}
@@ -101,7 +93,7 @@ const WordList = () => {
                 sortDirection={sortDirection}
                 handleSort={handleSort}
               />
-              <TableCell sx={{ fontWeight: "bold" }}>듣다</TableCell>
+              <ListenHeadCell/>
               <LanguageHeadCell
                 language="dutch"
                 fieldTitle="Nederlands"

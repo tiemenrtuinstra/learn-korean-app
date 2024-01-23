@@ -25,8 +25,7 @@ const WordCards = () => {
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [resourceType, setResourceType] = useState<string | null>(null);
-
-
+  const [isFlipped, setIsFlipped] = useState(false);
 
   const handleNext = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % combinedResources.length);
@@ -64,30 +63,44 @@ const WordCards = () => {
     fetchResourceType();
   }, [currentResource]);
   return (
+    <>
 
-    <div>
-
-      <Card sx={{ maxWidth: 800, margin: "auto", marginTop: 2 }}>
-        <CardContent>
-          {isWord(currentResource) && <WordCard resource={currentResource} />}
-          {isAlphabet(currentResource) && <AlphabetCard resource={currentResource} />}
-          {isNumber(currentResource) && <NumberCard resource={currentResource} />}
+      <div onClick={() => setIsFlipped(!isFlipped)} className={`flip-card ${isFlipped ? 'flipped' : ''}`}>
+        <Card className="card-front">
+          <CardContent sx={{ minHeight: 200 }}>
+            {isWord(currentResource) && <WordCard resource={currentResource} />}
+            {isAlphabet(currentResource) && <AlphabetCard resource={currentResource} />}
+            {isNumber(currentResource) && <NumberCard resource={currentResource} />}
+          </CardContent>
+        </Card>
+        <Card className="card-back">
+          <CardContent sx={{ minHeight: 200 }}>
+            <Typography align="center" variant="h4" component="div">
+              Bron 
+            </Typography>
+            <Typography align="center" component="div">
+              {currentResource.resource}
+            </Typography>
+          </CardContent>
+        </Card>
+      </div>
+      <Card className="card-navigation">
+        <CardContent sx={{ margin: '0px', padding: '0px' }}>
+          <Box
+            component="span"
+            m={2}
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
+            gap={2}
+          >
+            <Button variant="contained" size="medium" color="primary" onClick={handlePrev}>Vorige</Button>
+            <SpeakButton text={currentResource.hangul} lang="ko" />
+            <Button variant="contained" size="medium" color="primary" onClick={handleNext}>Volgende</Button>
+          </Box>
         </CardContent>
-
-        <Box
-          component="span"
-          m={1}
-          display="flex"
-          justifyContent="space-between"
-          alignItems="center"
-        >
-          <Button variant="contained" size="medium" color="primary" onClick={handlePrev}>Vorige</Button>
-          {resourceType}
-          <SpeakButton text={currentResource.hangul} lang="ko" />
-          <Button variant="contained" size="medium" color="primary" onClick={handleNext}>Volgende</Button>
-        </Box>
       </Card>
-    </div>
+    </>
   );
 };
 

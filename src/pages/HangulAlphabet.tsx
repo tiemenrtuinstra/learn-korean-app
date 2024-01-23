@@ -32,7 +32,7 @@ function HangulAlphabet() {
                             {letters.map((letter, index) => (
                                 <Grid item xs={4} sm={2} key={index}>
                                     <SpeakCard text={letter.hangul} lang={'ko'} cardContent={<>
-                                        <Typography variant="h5" align="center">{letter.hangul}</Typography>
+                                        <Typography variant="h5" align="center" className={"hangulFont"}>{letter.hangul}</Typography>
                                         <Typography variant="subtitle1" align="center">{Array.isArray(letter.romanisation) ? letter.romanisation.join(', ') : letter.romanisation}
                                             {letter.remarks && ` (${letter.remarks})`}
                                         </Typography>

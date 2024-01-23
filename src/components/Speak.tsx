@@ -16,6 +16,7 @@ export const SpeakButton = ({
 
   return (
     <IconButton
+      vocab="speak"
       onClick={() => {
         const speech = new SpeechSynthesisUtterance();
         speech.text = text;
@@ -43,7 +44,7 @@ export const SpeakCard = ({
 
   return (
     <Card className={"speak-card"}>
-      <ButtonBase color={"secondary"} onClick={() => {
+      <ButtonBase onClick={() => {
         const speech = new SpeechSynthesisUtterance();
         speech.text = text;
         speech.lang = lang;

@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 import { Avatar, BottomNavigation, BottomNavigationAction, Box, CssBaseline, List, ListItemAvatar, ListItemButton, ListItemText, Paper } from '@mui/material';
 import { Link } from 'react-router-dom';
@@ -12,6 +13,7 @@ import RoutesOptions, { RouteOption } from "../Routes";
 
 export default function TabBottomNavigation() {
     const [value, setValue] = React.useState(0);
+    const location = useLocation();
 
     return (
         <Box sx={{ pb: 7 }}>
@@ -19,7 +21,7 @@ export default function TabBottomNavigation() {
             <Paper sx={{ position: 'fixed', bottom: 7, left: 7, right: 7 }} elevation={3}>
                 <BottomNavigation
                     showLabels
-                    value={value}
+                    value={location.pathname}
                     onChange={(event, newValue) => {
                         setValue(newValue);
                     }}
@@ -30,6 +32,7 @@ export default function TabBottomNavigation() {
                             icon={route.icon}
                             component={Link}
                             to={route.path}
+                            value={route.path}
                         />
                     ))}
                 </BottomNavigation>
