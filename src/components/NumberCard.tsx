@@ -4,13 +4,18 @@ import { KoreanNumber, SinoKoreanNumber } from '../Numbers';
 import {
     Typography,
 } from "@mui/material";
+import { ResourceType } from '../Resources';
 
 export const NumberCard = ({ resource }: { resource: KoreanNumber | SinoKoreanNumber }) => (
     <>
-        <Typography variant="h2" align="center">{resource.hangul}</Typography>
+        <Typography variant="h2" align="center" className='hangulFont'>{resource.hangul}</Typography>
         <Typography variant="h5" align="center">{resource.romanisation}</Typography>
-        <Typography variant="h6" align="center">{resource.number}</Typography>
+    </>
+);
+
+export const NumberCardBack = ({ resource }: { resource: KoreanNumber | SinoKoreanNumber }) => (
+    <>
+        <Typography variant="h5" align="center">{resource.number}</Typography>
         <Typography align="center">{resource.type}</Typography>
-        
     </>
 );

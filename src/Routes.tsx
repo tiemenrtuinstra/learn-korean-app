@@ -22,10 +22,10 @@ import ExerciseIcon from '@mui/icons-material/FitnessCenter';
 import MultipleChoiceIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import WritingIcon from '@mui/icons-material/Create';
 import SpeakingIcon from '@mui/icons-material/Mic';
+import PinIcon from '@mui/icons-material/PinOutlined';
 import FillIcon from '@mui/icons-material/FormatColorFill';
 import FinishedIcon from '@mui/icons-material/CheckCircleOutline';
-import NumberListIcon from '@mui/icons-material/Filter1';
-import CreditCardIcon from '@mui/icons-material/CreditCard';
+import StyleIcon from '@mui/icons-material/StyleOutlined';
 
 export type RouteOption = {
     path: string;
@@ -47,8 +47,8 @@ export const RoutesOptions: RouteOption[] = [
     { path: "/", title: "Introduction", element: <Introduction />, inBottomNav: false, inDrawer: false, isExercise: false, icon: <HomeIcon />, enabled: true },
     { path: "/Alfabet", title: "Alfabet", element: <HangulAlphabet />, inBottomNav: true, inDrawer: false, isExercise: false, icon: <HangulIcon />, enabled: true },
     { path: "/woorden-lijst", title: "Woordenlijst", element: <WordList />, inBottomNav: true, inDrawer: false, isExercise: false, icon: <ListIcon />, enabled: true },
-    { path: "/woorden-kaarten", title: "Flashcards", element: <WordCards />, inBottomNav: true, inDrawer: false, isExercise: false, icon: <CreditCardIcon />, enabled: true },
-    { path: "/nummers", title: "Nummers", element: <NumberList />, inBottomNav: true, inDrawer: false, isExercise: false, icon: <NumberListIcon />, enabled: true },
+    { path: "/woorden-kaarten", title: "Flashcards", element: <WordCards />, inBottomNav: true, inDrawer: false, isExercise: false, icon: <StyleIcon />, enabled: true },
+    { path: "/nummers", title: "Nummers", element: <NumberList />, inBottomNav: true, inDrawer: false, isExercise: false, icon: <PinIcon />, enabled: true },
     { path: "/vertaler", title: "Vertalen", element: <Translator />, inBottomNav: true, inDrawer: false, isExercise: false, icon: <TranslateIcon />, enabled: true },
     { path: "/oefeningen", title: "oefeningen", element: <Exercise />, inBottomNav: true, inDrawer: false, isExercise: false, icon: <ExerciseIcon />, enabled: true },
     { path: "/multiple-choice", title: "Multiple Choice", element: <MultipleChoice />, inBottomNav: false, inDrawer: false, isExercise: true, icon: <MultipleChoiceIcon />, enabled: true },

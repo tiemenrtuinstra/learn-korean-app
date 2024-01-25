@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Button, Box, Card, Paper, Grid } from '@mui/material'; // Import the Grid component
-import numbers, { Number, NumberListProps } from '../Numbers';
+import { Button, Card, Paper, Grid } from '@mui/material'; // Import the Grid component
+import numbers from '../Numbers';
 import NumberSystem from '../components/NumberSystem';
 
 const NumberList = () => {
@@ -19,7 +19,7 @@ const NumberList = () => {
 
   return (
     <div>
-      <Card component={Paper}
+      <Card component={Paper} className='max-width'
         sx={{ maxWidth: 800, margin: "auto", padding: "1rem 0px " }}>
         <Grid container justifyContent="center" spacing={2} style={{ padding: '0px 14px' }}>
           <Grid item sm={6} xs={12}>

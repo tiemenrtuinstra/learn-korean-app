@@ -1,37 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from 'react';
 import {
   AppBar,
   Toolbar,
   Typography,
   IconButton,
-  CardContent,
-  Card,
-  CardMedia,
 } from "@mui/material";
-import { Link } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
-import koreanFlag from "../assets/korean-flag.png";
-import { useLocation } from 'react-router-dom';
-import headerImage from '../assets/header.jpeg'; // replace with your actual path
-import { title } from "process";
+import koreanFlag from "../assets/korean-flag.png"; 
+import easterEgg from '../assets/easteregg.gif';
 import NavDrawer from "./NavDrawer";
 import { isAnyRouteInDrawerEnabled } from "../Routes";
-interface HeaderProps {
-  title: string;
-}
 
 const Navigation = () => {
-  const location = useLocation();
-  const title = location.pathname.substring(1).replace(/-/g, ' ');
   const [drawerOpen, setDrawerOpen] = React.useState(false); // Add this line
+  const [showEasterEgg, setShowEasterEgg] = useState(false);
 
   const handleDrawerToggle = () => { // Add this function
     setDrawerOpen(!drawerOpen);
   };
+
+  useEffect(() => {
+    if (showEasterEgg) {
+      const utterance = new SpeechSynthesisUtterance();
+      utterance.text = '만세'; // "yay" in Korean
+      utterance.lang = 'ko-KR';
+      window.speechSynthesis.speak(utterance);
+    }
+  }, [showEasterEgg]);
+
   return (
     <div>
-      <AppBar className={"app-toolbar"} sx={{ position: 'fixed', top: 7, left: 7, right: 7,}}>
-        <Toolbar sx={{margin:'0px auto'}}>
+      <AppBar className={"app-toolbar"} sx={{ position: 'fixed', top: 7, left: 7, right: 7, }}>
+        <Toolbar sx={{ margin: '0px auto' }}>
 
           {isAnyRouteInDrawerEnabled() === true && (
             <>
@@ -52,14 +52,17 @@ const Navigation = () => {
             alt="Korean Flag"
             style={{ height: "40px", marginRight: "8px" }}
           />
-          <Typography color={"primary"} variant="h3">
+          <Typography color={"primary"} variant="h4">
             Learn
-          </Typography>
-          <Typography color={"secondary"} variant="h4">
-            &nbsp;한국
+          </Typography>&nbsp;
+          <Typography color={"secondary"} variant="h3" className={"hangulFont"} onClick={() => setShowEasterEgg(true)}>
+            한국
           </Typography>
         </Toolbar>
       </AppBar>
+      {showEasterEgg && (
+        <img src={easterEgg} alt="easter egg" className='easteregg clicked' onClick={() => setShowEasterEgg(false)}/>
+      )}
     </div>
   );
 }

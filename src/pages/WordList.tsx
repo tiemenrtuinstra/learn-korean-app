@@ -8,16 +8,15 @@ import {
   TableRow,
   Paper,
   TablePagination,
-  TableCell,
 } from "@mui/material";
 import words, { Word } from "../Words";
 import { handleSearch, SearchFilter } from "../components/SearchFilter";
 import { LanguageCell, ListenCell,LanguageHeadCell, ListenHeadCell  } from "../components/TableCell";
 
 const WordList = () => {
-  const [currentWord, setCurrentWord] = useState(0);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  /*eslint-disable-next-line*/
   const [showAll, setShowAll] = useState(false);
   // Add state for sorting
   const [sortField, setSortField] = React.useState<keyof Word | null>("hangul");
@@ -79,8 +78,8 @@ const WordList = () => {
         setFilteredWords={setFilteredWords}
         words={words}
       />
-      <TableContainer component={Paper}
-        sx={{ maxWidth: 800, margin: "auto", marginTop: 2 }}
+      <TableContainer component={Paper} className='max-width'
+        sx={{margin: "auto", marginTop: 2 }}
       >
 
         <Table className="wordlist-table">

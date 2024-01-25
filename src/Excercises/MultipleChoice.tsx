@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import words from '../database/words.json';
-import { Button, Box, Typography, Alert, Snackbar, AlertColor, Grid, Divider, LinearProgress, styled, Theme } from '@mui/material';
+import { Button, Box, Typography, Alert, Snackbar, AlertColor, Grid, Divider, LinearProgress } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { LinearProgressWithLabel } from '../components/LinearProgressWithLabel';
 import { Card, CardContent, } from '@mui/material';
-
+import useCheat from '../hooks/useCheat';
 
 const MultipleChoice = () => {
   // Define a constant for the maximum number of questions
   const MAX_STREAK = 10;
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [selectedAnswer,setSelectedAnswer] = useState('');
+  const [selectedAnswer, setSelectedAnswer] = useState('');
   const [correctAnswers, setCorrectAnswers] = useState(0);
   const [wrongAnswers, setWrongAnswers] = useState(0);
 
@@ -21,11 +20,15 @@ const MultipleChoice = () => {
   const [alert, setAlert] = useState({ open: false, type: '', message: '' });
   const [score, setScore] = useState(0);
   const [progress, setProgress] = useState(0);
-  const [cheatMode, setCheatMode] = useState(0);
+
+
+  const konamiCodeKeyboardCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+  const { cheatMode, setCheatMode } = useCheat(konamiCodeKeyboardCode, setAlert);
 
   const [repeatQuestions, setRepeatQuestions] = useState<number[]>([]);
 
   const navigate = useNavigate();
+
   // Generate options when the current question changes
   useEffect(() => {
 
@@ -37,34 +40,19 @@ const MultipleChoice = () => {
       }
     }
     setOptions(newOptions.filter(option => option !== undefined).sort(() => Math.random() - 0.5));
-    setProgress((score / MAX_STREAK) * 100);
-  }, [currentQuestion, score]);
+  }, [currentQuestion]);
 
-  // Inside the question component
+
   useEffect(() => {
-    const konamiCodeKeyboardCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+    setProgress((streak / MAX_STREAK) * 100);
+  }, [streak]);
 
-    const keydownHandler = (event: KeyboardEvent) => {
-      if (event.key === konamiCodeKeyboardCode[cheatMode]) {
-        setCheatMode((prevIndex) => prevIndex + 1);
-      } else {
-        setCheatMode(0);
-      }
 
-      if (cheatMode + 1 === konamiCodeKeyboardCode.length) {
-        setAlert({ open: true, type: 'info', message: 'Cheating enabled!' });
-      }
-    };
-
-    window.addEventListener('keydown', keydownHandler);
-    return () => window.removeEventListener('keydown', keydownHandler);
-  }, [cheatMode, setCheatMode]);
-
-  const handleAnswerClick = (answer: string) => {
+  const handleAnswerClick = (answer: string, correctAnswer: string) => {
     setSelectedAnswer(answer);
 
     // Check if the answer is correct
-    if (answer === words[currentQuestion].dutch) {
+    if (answer === correctAnswer) {
       // If the answer is correct, increment the streak and correctAnswers
       setScore(prevScore => prevScore + 1);
       setStreak(prevStreak => prevStreak + 1);
@@ -85,7 +73,7 @@ const MultipleChoice = () => {
     if (repeatQuestions.includes(currentQuestion)) {
       setMaxStreak(prevMaxStreak => prevMaxStreak + 1);
     }
-    
+
     // Move to the next question or finish the quiz
     if (streak === MAX_STREAK) {
       // Navigate to the finished page when the streak of 10 correct answers is met
@@ -95,10 +83,9 @@ const MultipleChoice = () => {
     }
   };
 
-
   return (
     <>
-      <Card>
+      <Card className='max-width'>
         <CardContent>
           <Snackbar
             open={alert.open}
@@ -124,9 +111,9 @@ const MultipleChoice = () => {
                 <Grid item key={index} sm={6} xs={12}>
                   <Button
                     key={index}
-                    onClick={() => handleAnswerClick(option)}
+                    onClick={() => handleAnswerClick(option, words[currentQuestion].dutch)}
+                    color={cheatMode && option === words[currentQuestion].dutch ? 'success' : 'primary'}
                     style={{
-                      backgroundColor: cheatMode && option === words[currentQuestion].dutch ? 'green' : '',
                       width: '100%'
                     }}
                     variant='contained'

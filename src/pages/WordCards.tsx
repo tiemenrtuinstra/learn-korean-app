@@ -8,11 +8,12 @@ import {
   Typography,
   Select,
   MenuItem,
+  Grid,
 } from "@mui/material";
 
-import { WordCard } from '../components/WordCard';
-import { AlphabetCard } from '../components/AlphabetCard';
-import { NumberCard } from '../components/NumberCard';
+import { WordCard, WordCardBack } from '../components/WordCard';
+import { AlphabetCard, AlphabetCardBack } from '../components/AlphabetCard';
+import { NumberCard, NumberCardBack } from '../components/NumberCard';
 
 import { ResourceType, combinedResources } from "../Resources";
 
@@ -27,12 +28,20 @@ const WordCards = () => {
   const [resourceType, setResourceType] = useState<string | null>(null);
   const [isFlipped, setIsFlipped] = useState(false);
 
+  const [filter, setFilter] = useState('all');
+
+  const handleFilterChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
+    setFilter(event.target.value);
+  };
+
+  const filteredResource = filter === 'all' ? combinedResources : combinedResources.filter(resource => resource.resource === filter);
+
   const handleNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % combinedResources.length);
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % filteredResource.length);
   };
 
   const handlePrev = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + combinedResources.length) % combinedResources.length);
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + filteredResource.length) % filteredResource.length);
   };
 
   function isWord(resource: any): resource is Word {
@@ -47,7 +56,7 @@ const WordCards = () => {
     return resource && resource.resource === ResourceType.Number;
   }
 
-  const currentResource = combinedResources[currentIndex];
+  const currentResource = filteredResource[currentIndex];
 
   useEffect(() => {
     const fetchResourceType = async () => {
@@ -64,23 +73,47 @@ const WordCards = () => {
   }, [currentResource]);
   return (
     <>
+      <Card className="table-filter" sx={{ maxWidth: 800, margin: "auto", marginTop: 2, marginBottom: 2 }}>
+        <CardContent>
+          <form noValidate autoComplete="off">
+            <Grid container spacing={2} alignItems="center">
+
+              <Grid item xs={12}>
+                <Select value={filter} onChange={handleFilterChange}
+                  variant="outlined"
+                  size="small"
+                  displayEmpty
+                  fullWidth
+                >
+                  <MenuItem value="all">
+                    <em>Alle categorieen</em>
+                  </MenuItem>
+
+                  <MenuItem value={ResourceType.Word}>Woorden</MenuItem>
+                  <MenuItem value={ResourceType.Alphabet}>Alfabet</MenuItem>
+                  <MenuItem value={ResourceType.Number}>Nummers</MenuItem>
+                </Select>
+
+
+              </Grid>
+            </Grid>
+          </form>
+        </CardContent>
+      </Card>
 
       <div onClick={() => setIsFlipped(!isFlipped)} className={`flip-card ${isFlipped ? 'flipped' : ''}`}>
         <Card className="card-front">
-          <CardContent sx={{ minHeight: 200 }}>
+          <CardContent>
             {isWord(currentResource) && <WordCard resource={currentResource} />}
             {isAlphabet(currentResource) && <AlphabetCard resource={currentResource} />}
             {isNumber(currentResource) && <NumberCard resource={currentResource} />}
           </CardContent>
         </Card>
         <Card className="card-back">
-          <CardContent sx={{ minHeight: 200 }}>
-            <Typography align="center" variant="h4" component="div">
-              Bron 
-            </Typography>
-            <Typography align="center" component="div">
-              {currentResource.resource}
-            </Typography>
+          <CardContent>
+            {isWord(currentResource) && <WordCardBack resource={currentResource} />}
+            {isAlphabet(currentResource) && <AlphabetCardBack resource={currentResource} />}
+            {isNumber(currentResource) && <NumberCardBack resource={currentResource} />}
           </CardContent>
         </Card>
       </div>

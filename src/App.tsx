@@ -1,11 +1,10 @@
-import { BrowserRouter as Router, Route, Routes, useParams } from 'react-router-dom';
-import { useEffect } from 'react';
-import React, { useState, useContext } from "react";
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+
+import React from "react";
 
 import RoutesOptions, { RouteOption } from "./Routes";
 import Navigation from './components/Navigation';
 import BottomNavigation from './components/BottomNavigation';
-
 
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
