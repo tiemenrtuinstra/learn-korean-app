@@ -1,6 +1,7 @@
 // FillInTheBlanks.tsx
 import React, { useState } from 'react';
 import words from '../database/words.json';
+import { Card, CardContent, Button } from '@mui/material';
 
 const FillInTheBlanks = () => {
   const [currentWord, setCurrentWord] = useState(words[0]);
@@ -28,16 +29,20 @@ const FillInTheBlanks = () => {
   // Remove a random character from the Hangul word
   const charIndexToRemove = Math.floor(Math.random() * currentWord.hangul.length);
   const partialWord = currentWord.hangul.slice(0, charIndexToRemove) + '_' + currentWord.hangul.slice(charIndexToRemove + 1);
-
+console.log(currentWord.hangul);
+console.log(partialWord);
   return (
-    <div>
-      <p>Complete the following word in Hangul: {partialWord}</p>
-      <form onSubmit={handleSubmit}>
-        <input type="text" value={selectedOption} onChange={handleInputChange} />
-        <button type="submit">Submit</button>
-      </form>
-      <button onClick={nextWord}>Next word</button>
-    </div>
+    <>
+      <Card className='max-width'>
+        <CardContent>
+          <p>Complete the following word in Hangul: {partialWord}</p>
+          <form onSubmit={handleSubmit}>
+            <input type="text" value={selectedOption} onChange={handleInputChange} />
+            <Button type="submit" onClick={nextWord}>Submit</Button>
+          </form>
+        </CardContent>
+      </Card>
+    </>
   );
 }
 

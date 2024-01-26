@@ -15,7 +15,7 @@ export const AlphabetCard = ({ resource }: { resource: Alphabet }) => (
 
 export const AlphabetCardBack = ({ resource }: { resource: Alphabet }) => (
   <>
-    <Typography variant="h2" align="center">{Array.isArray(resource.romanisation) ? resource.romanisation.join(', ') : resource.romanisation}
+    <Typography variant="h3" align="center">{Array.isArray(resource.romanisation) ? resource.romanisation.join(', ') : resource.romanisation}
       {resource.remarks && ` (${resource.remarks})`}
     </Typography>
     <Typography variant="h5" align="center">{resource.type}</Typography>

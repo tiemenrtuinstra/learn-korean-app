@@ -124,8 +124,8 @@ body {
   ) !important; // Apply a blur effect to the content behind the element
 
   &.max-width {
-    width: 500px;
-    max-width: calc(100vw - 14px);
+    width: 500px !important;
+    max-width: calc(100vw - 14px) !important;
   }
   &.alert {
     margin: 14px 0px;
@@ -134,16 +134,16 @@ body {
       margin: 0px;
     }
     &.alert-error {
-      @include alert-style($error, $error-dark, $error-card-bg);
+      @include alert-style($error);
     }
     &.alert-warning {
-      @include alert-style($warning, $warning-dark, $warning-card-bg);
+      @include alert-style($warning);
     }
     &.alert-info {
-      @include alert-style($info, $info-dark, $info-card-bg);
+      @include alert-style($info);
     }
     &.alert-success {
-      @include alert-style($success, $success-dark, $success-card-bg);
+      @include alert-style($success);
     }
   }
 

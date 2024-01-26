@@ -24,6 +24,7 @@ const Navigation = () => {
       const utterance = new SpeechSynthesisUtterance();
       utterance.text = '만세'; // "yay" in Korean
       utterance.lang = 'ko-KR';
+      utterance.volume = 1;
       window.speechSynthesis.speak(utterance);
     }
   }, [showEasterEgg]);

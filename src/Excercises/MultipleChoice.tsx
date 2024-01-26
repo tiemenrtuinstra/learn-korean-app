@@ -103,7 +103,7 @@ const MultipleChoice = () => {
           </Snackbar>
           <Typography variant="h4">Score: {score}</Typography>
           <Typography>Wat is de correcte vertaling van: </Typography>
-          <Typography variant="h3">{words[currentQuestion].hangul}</Typography>
+          <Typography variant="h3" className='hangulFont'>{words[currentQuestion].hangul}</Typography>
           <Divider sx={{ margin: '1rem 0' }} />
           <Grid container justifyContent="center" spacing={2}>
             {

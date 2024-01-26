@@ -3,6 +3,9 @@ import React from "react";
 import { ButtonBase, Card, CardContent, IconButton } from "@mui/material";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 
+const speech = new SpeechSynthesisUtterance();
+speech.volume = 1;
+
 export const SpeakButton = ({
   text,
   lang,
@@ -18,7 +21,6 @@ export const SpeakButton = ({
     <IconButton
       vocab="speak"
       onClick={() => {
-        const speech = new SpeechSynthesisUtterance();
         speech.text = text;
         speech.lang = lang;
         window.speechSynthesis.speak(speech);
@@ -45,7 +47,6 @@ export const SpeakCard = ({
   return (
     <Card className={"speak-card"}>
       <ButtonBase onClick={() => {
-        const speech = new SpeechSynthesisUtterance();
         speech.text = text;
         speech.lang = lang;
         window.speechSynthesis.speak(speech);

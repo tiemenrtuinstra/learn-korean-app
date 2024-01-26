@@ -95,12 +95,12 @@ $info-card-bg: $blue-card-bg;
   --quinary-color: var(--black);
 }
 
-@mixin alert-style($color, $dark-color, $card-bg-color) {
-  border: 2px solid $dark-color !important;
-  box-shadow: 0px 2px 1px -1px $dark-color,
+@mixin alert-style($color) {
+  border: 2px solid darken($color, $amount) !important;
+  box-shadow: 0px 2px 1px -1px darken($color, $amount),
     0px 1px 1px 0px rgba(0, 0, 0, 0.14), 
-    0px 1px 3px 0px $dark-color !important;
-  background-color: $card-bg-color !important;
+    0px 1px 3px 0px darken($color, $amount) !important;
+  background-color: rgba(lighten($color, 45%),0.4) !important;
   color: $color !important;
 }
 

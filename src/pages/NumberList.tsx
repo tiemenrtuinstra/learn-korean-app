@@ -18,7 +18,7 @@ const NumberList = () => {
   };
 
   return (
-    <div>
+    <div style={{marginBottom:'14px'}}>
       <Card component={Paper} className='max-width'
         sx={{ maxWidth: 800, margin: "auto", padding: "1rem 0px " }}>
         <Grid container justifyContent="center" spacing={2} style={{ padding: '0px 14px' }}>

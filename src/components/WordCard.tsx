@@ -15,6 +15,7 @@ export const WordCard = ({ resource }: { resource: Word }) => (
 
 export const WordCardBack = ({ resource }: { resource: Word }) => (
     <>
-        <Typography variant="h5" align="center">{resource.dutch}</Typography>
+        <Typography variant="h3" align="center">{resource.dutch}</Typography>
+        <Typography variant="h5" align="center">{resource.source}</Typography>
     </>
 );

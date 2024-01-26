@@ -1,6 +1,6 @@
 // FinishedPage.tsx
 import { Card, CardContent, Typography } from '@mui/material';
-import AlertCard, { AlertType } from '../components/AlertCard';
+import AlertCard, { Severity } from '../components/AlertCard';
 import AlertLetter from '../components/AlertLetter';
 import { Pie } from 'react-chartjs-2';
 
@@ -51,14 +51,14 @@ const FinishedPage: React.FC<FinishedPageProps> = ({ score, correctAnswers, wron
       <Card>
         <CardContent>
           <Typography variant="h4" align="center">Oefening afgerond!</Typography>
-          <Typography variant="h5" align="center">Je hebt een streak-score van: <b><AlertLetter alertType={AlertType.Info} text={score.toString()} /></b>.</Typography>
-          <Typography variant="h5" align="center">Je hebt <b><AlertLetter alertType={AlertType.Success} text={correctAnswers.toString()} /></b> vragen goed.</Typography>
-          <Typography variant="h5" align="center">Je hebt <b><AlertLetter alertType={AlertType.Error} text={wrongAnswers.toString()} /></b> vragen fout.</Typography>
-          <br />
+          <Typography variant="h5" align="center">Je hebt een streak-score van: <b><AlertLetter severity={Severity.Info} text={score.toString()} /></b>.</Typography>
+          <Typography variant="h5" align="center">Je hebt <b><AlertLetter severity={Severity.Success} text={correctAnswers.toString()} /></b> vragen goed.</Typography>
+          <Typography variant="h5" align="center">Je hebt <b><AlertLetter severity={Severity.Error} text={wrongAnswers.toString()} /></b> vragen fout.</Typography>
+          <br />severity
           <Pie data={pieData} options={pieOptions} />
         </CardContent>
       </Card>
-      {cheatMode && <AlertCard alertType={AlertType.Error} title="Ohh!!" text="Cheatmode staat <b>AAN</b>." />}
+      {cheatMode && <AlertCard severity={Severity.Error} title="Ohh!!" content="Cheatmode staat <b>AAN</b>." />}
     </>
   );
 };

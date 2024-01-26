@@ -1,15 +1,15 @@
 import React from 'react';
-import { AlertType } from './AlertCard'; // Import the missing type declaration
+import { Severity } from './AlertCard'; // Import the missing type declaration
 
 export interface AlertLetterProps {
-  alertType: AlertType;
+  severity: Severity;
   text: string;
 }
 
-const AlertLetter: React.FC<AlertLetterProps> = ({ alertType, text }) => {
+const AlertLetter: React.FC<AlertLetterProps> = ({ severity, text }) => {
 
   return (
-    <p className={`text text-${alertType}`} role="alert" dangerouslySetInnerHTML={{ __html: text }} />
+    <span className={`text text-${severity}`} role="alert" dangerouslySetInnerHTML={{ __html: text }} />
   );
 }
 export default AlertLetter;

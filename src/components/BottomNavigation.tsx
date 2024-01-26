@@ -16,7 +16,7 @@ export default function TabBottomNavigation() {
     const location = useLocation();
 
     return (
-        <Box sx={{ pb: 7 }}>
+        <Box className="full-width" sx={{ pb: 7 }}>
             <CssBaseline />
             <Paper sx={{ position: 'fixed', bottom: 7, left: 7, right: 7 }} elevation={3}>
                 <BottomNavigation

@@ -2,7 +2,7 @@
 import { Card, CardContent, Typography } from '@mui/material';
 import React from 'react';
 
-export enum AlertType {
+export enum Severity {
   Success = 'success',
   Info = 'info',
   Warning = 'warning',
@@ -10,18 +10,18 @@ export enum AlertType {
 }
 
 export interface AlertCardProps {
-  alertType: AlertType;
+  severity: Severity;
   title: string;
-  text: string;
+  content: string;
 }
 
-const AlertCard: React.FC<AlertCardProps> = ({ alertType, title, text }) => {
+const AlertCard: React.FC<AlertCardProps> = ({ severity, title, content }) => {
 
   return (
-    <Card className={`alert alert-${alertType}`} role="alert">
+    <Card className={`alert alert-${severity}`} role="alert">
       <CardContent>
         <Typography variant="h5">{title}</Typography>
-        <p dangerouslySetInnerHTML={{ __html: text }} />
+        <p dangerouslySetInnerHTML={{ __html: content }} />
       </CardContent >
     </Card >
   );

@@ -15,7 +15,7 @@ export const NumberCard = ({ resource }: { resource: KoreanNumber | SinoKoreanNu
 
 export const NumberCardBack = ({ resource }: { resource: KoreanNumber | SinoKoreanNumber }) => (
     <>
-        <Typography variant="h5" align="center">{resource.number}</Typography>
+        <Typography variant="h3" align="center">{resource.number}</Typography>
         <Typography align="center">{resource.type}</Typography>
     </>
 );
