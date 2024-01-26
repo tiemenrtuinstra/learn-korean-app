@@ -22,6 +22,9 @@ words = words.map((word: Word) => ({
   romanisation: hangulRomanization.convert(word.hangul as string),
 }));
 
+//randomize the order of the words
+export const randomisedWords = words.sort(() => Math.random() - 0.5);
+
 export const wordSources: WordSource[] = words.reduce((unique, item) => {
   if (!unique.some(obj => obj.value === item.source)) {
     unique.push({ id: unique.length, value: item.source });

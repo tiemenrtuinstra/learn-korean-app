@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import words from '../database/words.json';
+import randomisedWords from '../Words';
 import { Button, Box, Typography, Alert, Snackbar, AlertColor, Grid, Divider, LinearProgress } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, } from '@mui/material';
@@ -32,9 +32,9 @@ const MultipleChoice = () => {
   // Generate options when the current question changes
   useEffect(() => {
 
-    const newOptions = [words[currentQuestion].dutch];
+    const newOptions = [randomisedWords[currentQuestion].dutch];
     while (newOptions.length < 4) {
-      const randomWord = words[Math.floor(Math.random() * words.length)];
+      const randomWord = randomisedWords[Math.floor(Math.random() * randomisedWords.length)];
       if (!newOptions.includes(randomWord.dutch)) {
         newOptions.push(randomWord.dutch);
       }
@@ -78,7 +78,7 @@ const MultipleChoice = () => {
     if (streak === MAX_STREAK) {
       // Navigate to the finished page when the streak of 10 correct answers is met
       navigate(`/finished/${score}/${correctAnswers}/${wrongAnswers}/${cheatMode}`);
-    } else if (currentQuestion < words.length - 1) {
+    } else if (currentQuestion < randomisedWords.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
     }
   };
@@ -101,9 +101,9 @@ const MultipleChoice = () => {
               {alert.message}
             </Alert>
           </Snackbar>
-          <Typography variant="h4">Score: {score}</Typography>
+          {/* <Typography variant="h4">Score: {score}</Typography> */}
           <Typography>Wat is de correcte vertaling van: </Typography>
-          <Typography variant="h3" className='hangulFont'>{words[currentQuestion].hangul}</Typography>
+          <Typography variant="h3" className='hangulFont'>{randomisedWords[currentQuestion].hangul}</Typography>
           <Divider sx={{ margin: '1rem 0' }} />
           <Grid container justifyContent="center" spacing={2}>
             {
@@ -111,8 +111,8 @@ const MultipleChoice = () => {
                 <Grid item key={index} sm={6} xs={12}>
                   <Button
                     key={index}
-                    onClick={() => handleAnswerClick(option, words[currentQuestion].dutch)}
-                    color={cheatMode && option === words[currentQuestion].dutch ? 'success' : 'primary'}
+                    onClick={() => handleAnswerClick(option, randomisedWords[currentQuestion].dutch)}
+                    color={cheatMode && option === randomisedWords[currentQuestion].dutch ? 'success' : 'primary'}
                     style={{
                       width: '100%'
                     }}
