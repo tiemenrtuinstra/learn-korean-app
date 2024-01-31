@@ -1,19 +1,6 @@
+import { Alphabet, } from './dto/types';
+import { AlphabetType, ResourceType } from './dto/enums';
 import alphabetJson from './database/alphabet.json';
-
-export enum AlphabetType {
-  Klinker = "klinkers",
-  DubbeleKlinker = "dubbele klinkers",
-  medeklinker = "medeklinker",
-  OpgezogenMedeklinkers = "opgezogen medeklinkers",
-  GespannenMedeklinkers = "gespannen medeklinkers",
-};
-
-export type Alphabet = {
-  hangul: string;
-  romanisation: string;
-  type: AlphabetType;
-  remarks?: string;
-};
 
 export const alphabetTypeExplanations = {
   [AlphabetType.Klinker]: 'Klinkers zijn de letters die je uitspreekt met je mond open. In het Koreaans zijn er 10 klinkers.',
@@ -23,20 +10,13 @@ export const alphabetTypeExplanations = {
   [AlphabetType.GespannenMedeklinkers]: 'Gespannen medeklinkers zijn medeklinkers die je uitspreekt met je mond dicht, maar die je met meer spanning uitspreekt dan normale medeklinkers. In het Koreaans zijn er 5 gespannen medeklinkers.',
 };
 
-export type AlphabetListProps = {
-  alphabet: Alphabet[];
-  page: number;
-  rowsPerPage: number;
-  handleChangePage: (event: unknown, newPage: number) => void;
-  handleChangeRowsPerPage: (event: React.ChangeEvent<HTMLInputElement>) => void;
-};
-
 // Ensure that alphabetJson is an array of Alphabet objects
 let alphabet: Alphabet[] = alphabetJson as Alphabet[];
 
 alphabet = alphabet.map(a => ({
   ...a,
-  type: AlphabetType[a.type as keyof typeof AlphabetType] || a.type
+  type: AlphabetType[a.type as keyof typeof AlphabetType] || a.type,
+  resource: ResourceType.Alphabet,
 }));
 
 

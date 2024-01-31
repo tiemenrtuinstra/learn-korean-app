@@ -1,17 +1,9 @@
+import { Word, WordSource } from "./dto/types";
+import { ResourceType } from "./dto/enums";
+
 import wordsJson from "./database/words.json";
 var hangulRomanization = require("hangul-romanization");
 
-export type Word = {
-  hangul: string;
-  romanisation?: string;
-  dutch: string;
-  source: string;
-};
-
-export type WordSource = {
-  id: number;
-  value: string;
-};
 
 // Ensure that wordsJson is an array of Word objects
 let words: Word[] = wordsJson as Word[];
@@ -20,6 +12,7 @@ let words: Word[] = wordsJson as Word[];
 words = words.map((word: Word) => ({
   ...word,
   romanisation: hangulRomanization.convert(word.hangul as string),
+  resource: ResourceType.Word,
 }));
 
 //randomize the order of the words
@@ -31,4 +24,5 @@ export const wordSources: WordSource[] = words.reduce((unique, item) => {
   }
   return unique;
 }, [] as WordSource[]).sort((a, b) => a.value.localeCompare(b.value));
+
 export default words;

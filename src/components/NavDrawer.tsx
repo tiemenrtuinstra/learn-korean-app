@@ -5,7 +5,8 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import RoutesOptions, { RouteOption } from "../Routes";
+import RoutesOptions from "../Routes";
+import { RouteOption } from '../dto/types';
 
 interface NavDrawerProps {
     open: boolean;
@@ -20,7 +21,7 @@ export default function NavDrawer({ open, onClose }: NavDrawerProps) {
             onClose={onClose}
         >
             <List>
-                {RoutesOptions.filter((route: { inDrawer: boolean; }) => route.inDrawer).map((route: RouteOption, index: number) => (
+                {RoutesOptions.filter((route: RouteOption) => !!route.inDrawer).map((route: RouteOption, index: number) => (
                     <ListItem button key={index} component={Link} to={route.path} onClick={onClose}>
                         <ListItemIcon>{route.icon}</ListItemIcon>
                         <ListItemText primary={route.title} />

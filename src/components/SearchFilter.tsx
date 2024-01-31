@@ -1,17 +1,15 @@
 // SearchFilter.tsx
-import React, { useState, useContext } from "react";
+import React from "react";
 import {
   SelectChangeEvent,
   TextField,
-  Select,
-  MenuItem,
   Card,
   CardContent,
   Grid,
-  Button,
 } from "@mui/material";
-import words, { Word, wordSources } from "../Words";
+import words, { wordSources } from "../Words";
 import WordSourceSelect from "../components/form/WordSourceSelect";
+import { Word } from "../dto/types";
 
 interface SearchFilterProps {
   searchTerm: string;

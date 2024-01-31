@@ -9,9 +9,10 @@ import {
   Paper,
   TablePagination,
 } from "@mui/material";
-import words, { Word } from "../Words";
+import words from "../Words";
+import { Word } from "../dto/types";
 import { handleSearch, SearchFilter } from "../components/SearchFilter";
-import { LanguageCell, ListenCell,LanguageHeadCell, ListenHeadCell  } from "../components/TableCell";
+import { LanguageCell, ListenCell, LanguageHeadCell, ListenHeadCell } from "../components/TableCell";
 
 const WordList = () => {
   const [page, setPage] = useState(0);
@@ -70,7 +71,7 @@ const WordList = () => {
 
   return (
 
-    <div style={{marginBottom:'14px'}}>
+    <div style={{ marginBottom: '14px' }}>
       <SearchFilter
         searchTerm={searchTerm}
         handleSearch={handleSearch}
@@ -79,7 +80,7 @@ const WordList = () => {
         words={words}
       />
       <TableContainer component={Paper} className='max-width'
-        sx={{margin: "auto", marginTop: 2 }}
+        sx={{ margin: "auto", marginTop: 2 }}
       >
 
         <Table className="wordlist-table">
@@ -92,7 +93,7 @@ const WordList = () => {
                 sortDirection={sortDirection}
                 handleSort={handleSort}
               />
-              <ListenHeadCell/>
+              <ListenHeadCell />
               <LanguageHeadCell
                 language="dutch"
                 fieldTitle="Nederlands"

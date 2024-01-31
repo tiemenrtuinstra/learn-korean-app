@@ -1,8 +1,7 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-
 import React from "react";
+import { BrowserRouter as Router } from 'react-router-dom';
 
-import RoutesOptions, { RouteOption } from "./Routes";
+import { RoutesWrapper } from "./Routes";
 import Navigation from './components/Navigation';
 import BottomNavigation from './components/BottomNavigation';
 
@@ -32,45 +31,45 @@ export const Colors = {
 console.log(Colors);
 
 const theme = createTheme({
-      palette: {
-        primary: {
+  palette: {
+    primary: {
       main: Colors.Primary,
-        },
-        secondary: {
+    },
+    secondary: {
       main: Colors.Secondary,
-        },
-        text: {
+    },
+    text: {
       primary: Colors.Black,
       secondary: Colors.Black,
-        },
-        background: {
+    },
+    background: {
       default: Colors.White,
-        },
-      },
-      components: {
-        MuiTableSortLabel: {
-          styleOverrides: {
-            root: {
+    },
+  },
+  components: {
+    MuiTableSortLabel: {
+      styleOverrides: {
+        root: {
           color: Colors.Black,
-              "&:hover": {
+          "&:hover": {
             color: Colors.Black
-              },
-              "&.Mui-active": {
-                "&&": {
+          },
+          "&.Mui-active": {
+            "&&": {
               color: Colors.Primary,
 
-                  "& * ": {
+              "& * ": {
                 color: Colors.Secondary,
-                  }
-                }
               }
-            },
-            icon: {
-          color: Colors.White
-        }
             }
           }
+        },
+        icon: {
+          color: Colors.White
+        }
       }
+    }
+  }
 });
 
 
@@ -82,11 +81,7 @@ const App = () => {
         <Router>
           <Navigation />
           <section id="content">
-            <Routes>
-              {RoutesOptions.filter((route: { enabled: any; }) => route.enabled).map((route: RouteOption) => (
-                <Route path={route.path} element={route.element} />
-              ))}
-            </Routes>
+            <RoutesWrapper />
           </section>
           <BottomNavigation />
         </Router>

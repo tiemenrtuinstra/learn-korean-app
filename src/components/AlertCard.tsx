@@ -7,12 +7,13 @@ export enum Severity {
   Info = 'info',
   Warning = 'warning',
   Error = 'error',
+  Default = 'default',
 }
 
 export interface AlertCardProps {
   severity: Severity;
-  title: string;
-  content: string;
+  title?: string;
+  content?: string;
 }
 
 const AlertCard: React.FC<AlertCardProps> = ({ severity, title, content }) => {
@@ -20,8 +21,8 @@ const AlertCard: React.FC<AlertCardProps> = ({ severity, title, content }) => {
   return (
     <Card className={`alert alert-${severity}`} role="alert">
       <CardContent>
-        <Typography variant="h5">{title}</Typography>
-        <p dangerouslySetInnerHTML={{ __html: content }} />
+        { title && <Typography variant="h5">{title}</Typography>}
+        { content && <p dangerouslySetInnerHTML={{ __html: content }} />}
       </CardContent >
     </Card >
   );

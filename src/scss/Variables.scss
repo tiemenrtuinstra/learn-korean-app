@@ -35,6 +35,11 @@ $grey-light: lighten($grey, $amount);
 $grey-dark: darken($grey, $amount);
 $grey-card-bg: rgba($grey, 0.4);
 
+$orange: #FFA500;
+$orange-light: lighten($orange, $amount);
+$orange-dark: darken($orange, $amount);
+$orange-card-bg: rgba($orange, 0.4);
+
 $primary-color: $blue;
 $primary-color-light: $blue-light;
 $primary-color-dark: $blue-dark;
@@ -70,10 +75,10 @@ $error-light: $red-light;
 $error-dark: $red-dark;
 $error-card-bg: $red-card-bg;
 
-$warning: $yellow;
-$warning-light: $yellow-light;
-$warning-dark: $yellow-dark;
-$warning-card-bg: $yellow-card-bg;
+$warning: $orange;
+$warning-light: $orange-light;
+$warning-dark: $orange-dark;
+$warning-card-bg: $orange-card-bg;
 
 $info: $blue;
 $info-light: $blue-light;
@@ -88,6 +93,7 @@ $info-card-bg: $blue-card-bg;
   --black: #000000;
   --white: #FFFFFF;
   --grey: #808080;
+  --orange: #FFA500;
   --primary-color: var(--blue);
   --secondary-color: var(--red);
   --tertiary-color: var(--yellow);
@@ -100,7 +106,7 @@ $info-card-bg: $blue-card-bg;
   box-shadow: 0px 2px 1px -1px darken($color, $amount),
     0px 1px 1px 0px rgba(0, 0, 0, 0.14), 
     0px 1px 3px 0px darken($color, $amount) !important;
-  background-color: rgba(lighten($color, 45%),0.4) !important;
+  background-color: rgba(lighten($color, 35%),0.4) !important;
   color: $color !important;
 }
 

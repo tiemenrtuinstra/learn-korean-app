@@ -23,7 +23,8 @@ const MultipleChoice = () => {
 
 
   const konamiCodeKeyboardCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
-  const { cheatMode, setCheatMode } = useCheat(konamiCodeKeyboardCode, setAlert);
+  const konamiCodeSwipeDirections = ['up', 'up', 'down', 'down', 'left', 'right', 'left', 'right'];
+  const { cheatMode, setCheatMode } = useCheat(konamiCodeKeyboardCode, konamiCodeSwipeDirections, setAlert);
 
   const [repeatQuestions, setRepeatQuestions] = useState<number[]>([]);
 

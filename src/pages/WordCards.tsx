@@ -1,11 +1,10 @@
 // WordList.tsx
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Button,
   Card,
   CardContent,
-  Typography,
   Select,
   MenuItem,
   Grid,
@@ -15,12 +14,11 @@ import { WordCard, WordCardBack } from '../components/WordCard';
 import { AlphabetCard, AlphabetCardBack } from '../components/AlphabetCard';
 import { NumberCard, NumberCardBack } from '../components/NumberCard';
 
-import { ResourceType, combinedResources } from "../Resources";
-
+import { combinedResources } from "../Resources";
 import { SpeakButton } from "../components/Speak";
-import { Alphabet } from "../Alphabet";
-import { Word, WordSource } from "../Words";
-import { KoreanNumber, SinoKoreanNumber } from '../Numbers';
+import { ResourceType } from "../dto/enums";
+import { Alphabet, Word, KoreanNumber, SinoKoreanNumber } from "../dto/types";
+
 
 const WordCards = () => {
 

@@ -1,7 +1,9 @@
 import React from 'react';
-import alphabet, { Alphabet, AlphabetType, alphabetTypeExplanations } from '../Alphabet';
-import { SpeakButton, SpeakCard } from '../components/Speak';
-import { Box, Card, CardContent, Grid, Typography, styled } from '@mui/material';
+import alphabet, { alphabetTypeExplanations } from '../Alphabet';
+import { SpeakCard } from '../components/Speak';
+import { Card, CardContent, Grid, Typography } from '@mui/material';
+import { Alphabet } from '../dto/types';
+import { AlphabetType } from '../dto/enums';
 
 function HangulAlphabet() {
     // Group alphabet by type

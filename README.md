@@ -2,6 +2,15 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## live site
+
+The app can be visited by going to (https://learnkorean.tuinstra.family)
+
+## available cheat codes
+
+For the excercises you can use cheats on the pc.\
+Multiple Choise `up up down down left right left right b a`
+
 ## Available Scripts
 
 In the project directory, you can run:

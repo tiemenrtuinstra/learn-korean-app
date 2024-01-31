@@ -1,10 +1,9 @@
 // WordCard.tsx
 import React from 'react';
-import { Word } from '../Words';
 import {
     Typography,
 } from "@mui/material";
-import { ResourceType } from '../Resources';
+import { Word } from '../dto/types';
 
 export const WordCard = ({ resource }: { resource: Word }) => (
     <>

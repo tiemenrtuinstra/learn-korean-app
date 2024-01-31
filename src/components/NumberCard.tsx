@@ -1,10 +1,10 @@
 // NumberCard.tsx
 import React from 'react';
-import { KoreanNumber, SinoKoreanNumber } from '../Numbers';
+
 import {
     Typography,
 } from "@mui/material";
-import { ResourceType } from '../Resources';
+import { KoreanNumber, SinoKoreanNumber } from '../dto/types';
 
 export const NumberCard = ({ resource }: { resource: KoreanNumber | SinoKoreanNumber }) => (
     <>

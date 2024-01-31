@@ -1,10 +1,10 @@
 // AlphabetCard.tsx
 import React from 'react';
-import { Alphabet } from '../Alphabet';
+
 import {
   Typography,
 } from "@mui/material";
-import { ResourceType } from '../Resources';
+import { Alphabet } from '../dto/types';
 
 export const AlphabetCard = ({ resource }: { resource: Alphabet }) => (
   <>
