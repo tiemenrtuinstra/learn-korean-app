@@ -19,7 +19,7 @@ const WordSourceSelect: FC<WordSourceSelectProps> = ({ sourceFilter, wordSources
         fullWidth
     >
         <MenuItem value="">
-            <em>Alle categorieen</em>
+            <em>Alle categorieën</em>
         </MenuItem>
         {wordSources.map((source) => (
             <MenuItem key={source.id} value={source.value}>

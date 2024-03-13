@@ -83,7 +83,7 @@ export const SearchFilter: React.FC<SearchFilterProps> = ({
             <Grid container spacing={2} alignItems="center">
               <Grid item xs={12} sm={6}>
                 <TextField
-                  label="Search"
+                  label="Zoeken"
                   variant="outlined"
                   size="small"
                   value={searchTerm}

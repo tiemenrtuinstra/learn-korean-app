@@ -54,6 +54,7 @@ export type Alphabet = {
   hangul: string;
   romanisation: string;
   type: AlphabetType;
+  name?: string;
   remarks?: string;
   resource: ResourceType.Alphabet;
 };

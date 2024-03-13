@@ -5,6 +5,7 @@ import {
   TableBody,
   TableContainer,
   TableHead,
+  TableCell,
   TableRow,
   Paper,
   TablePagination,
@@ -93,6 +94,7 @@ const WordList = () => {
                 sortDirection={sortDirection}
                 handleSort={handleSort}
               />
+              <TableCell sx={{ fontWeight: "bold" }}></TableCell>
               <ListenHeadCell />
               <LanguageHeadCell
                 language="dutch"
@@ -107,6 +109,7 @@ const WordList = () => {
             {paginatedWords.map((word, index) => (
               <TableRow key={index}>
                 <LanguageCell word={word} field="hangul" />
+                <LanguageCell word={word} field="romanisation" />
                 <ListenCell text={word.hangul} lang="ko" />
                 <LanguageCell word={word} field="dutch" />
               </TableRow>

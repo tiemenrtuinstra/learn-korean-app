@@ -13,6 +13,6 @@ export enum AlphabetType {
     Klinker = "klinkers",
     DubbeleKlinker = "dubbele klinkers",
     medeklinker = "medeklinker",
-    OpgezogenMedeklinkers = "opgezogen medeklinkers",
-    GespannenMedeklinkers = "gespannen medeklinkers",
+    AspiratieMedeklinkers = "aspiratie medeklinkers",
+    SpanningMedeklinkers = "spanning medeklinkers",
   };

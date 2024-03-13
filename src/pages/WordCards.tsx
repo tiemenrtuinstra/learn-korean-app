@@ -84,7 +84,7 @@ const WordCards = () => {
                   fullWidth
                 >
                   <MenuItem value="all">
-                    <em>Alle categorieen</em>
+                    <em>Alle categorieën</em>
                   </MenuItem>
 
                   <MenuItem value={ResourceType.Word}>Woorden</MenuItem>

@@ -49,7 +49,7 @@ export const LanguageHeadCell = ({
 );
 
 export const ListenHeadCell = () => (
-  <TableCell className={"hangulFont"} align="right" sx={{ fontWeight: "bold", }}>
+  <TableCell className={"hangulFont"} align="center" sx={{ fontWeight: "bold", }}>
     듣다
   </TableCell>
 );

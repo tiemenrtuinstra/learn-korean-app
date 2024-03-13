@@ -36,7 +36,10 @@ function HangulAlphabet() {
                                     <SpeakCard text={letter.hangul} lang={'ko'} cardContent={<>
                                         <Typography variant="h5" align="center" className={"hangulFont"}>{letter.hangul}</Typography>
                                         <Typography variant="subtitle1" align="center">{Array.isArray(letter.romanisation) ? letter.romanisation.join(', ') : letter.romanisation}
-                                            {letter.remarks && ` (${letter.remarks})`}
+                                            {letter.name && ` ( ${letter.name} )`}
+                                        </Typography>
+                                        <Typography variant="subtitle2" align="center">
+                                            {letter.remarks && ` ( ${letter.remarks} )`}
                                         </Typography>
                                     </>
                                     } />
@@ -46,6 +49,22 @@ function HangulAlphabet() {
                     </div>
                 ))
             }
+            <Grid container spacing={2}>
+                <Grid item xs={12} style={{ marginTop: '14px' }}>
+                    <Card>
+                        <CardContent>
+                            <Typography variant="h4">Opmerkingen</Typography>
+                            <Typography variant="h5">Klinkers</Typography>
+                            <Typography variant="subtitle1">
+                                <ul>
+                                    <li>De ‘e’ en de ‘ae’ hierboven hebben dezelfde uitspraak, maar worden anders geschreven. Een beetje zoals in het Nederlands met ‘au’ en ‘ou’.</li>
+                                    <li>De ‘ye’ heeft net zoals bij de ‘e’ dezelfde uitspraak als ‘yae’.</li>
+                                </ul>
+                            </Typography>
+                        </CardContent>
+                    </Card>
+                </Grid>
+            </Grid>
         </section >
     );
 }
