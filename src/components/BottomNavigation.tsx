@@ -7,8 +7,9 @@ import TranslateIcon from '@mui/icons-material/Translate';
 import { getRoutesOptions } from "../Routes";
 import { RouteOption } from '../dto/types';
 import SettingsIcon from '@mui/icons-material/Settings';
+import PublicOutlined from '@mui/icons-material/PublicOutlined';
 
-export default function TabBottomNavigation({ showRomanisation, setShowRomanisation }: { showRomanisation: boolean, setShowRomanisation: React.Dispatch<React.SetStateAction<boolean>> }) {
+export default function TabBottomNavigation({ showRomanisation, setShowRomanisation, backgroundSeasonal, setBackgroundSeasonal }: { showRomanisation: boolean, setShowRomanisation: React.Dispatch<React.SetStateAction<boolean>>, backgroundSeasonal: boolean, setBackgroundSeasonal: React.Dispatch<React.SetStateAction<boolean>> }) {
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [value, setValue] = React.useState(0);
@@ -65,6 +66,19 @@ export default function TabBottomNavigation({ showRomanisation, setShowRomanisat
                     'aria-labelledby': 'basic-button',
                 }}
             >
+                <MenuItem>
+                    <ListItemIcon>
+                        <PublicOutlined fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText primary="Seizoensachtergrond" />
+                    <Switch
+                        checked={backgroundSeasonal}
+                        onChange={() => setBackgroundSeasonal(!backgroundSeasonal)}
+                        name="Seizoensachtergrond"
+                        inputProps={{ 'aria-label': 'toggle background seasonal' }}
+                    />
+                </MenuItem>
+                <Divider />
                 <MenuItem>
                     <ListItemIcon>
                         <TranslateIcon fontSize="small" />

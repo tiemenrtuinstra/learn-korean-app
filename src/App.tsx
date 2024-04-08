@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router } from 'react-router-dom';
 
 import { RoutesWrapper } from "./Routes";
@@ -74,16 +74,42 @@ const theme = createTheme({
 
 const App = () => {
   const [showRomanisation, setShowRomanisation] = useState(true);
+  const [backgroundSeasonal, setBackgroundSeasonal] = useState(true);
+
+  useEffect(() => {
+    document.body.classList.remove('spring', 'summer', 'autumn', 'winter', 'default');
+  
+    if (backgroundSeasonal) {
+      const today = new Date();
+      const year = today.getFullYear();
+  
+      const seasons = [
+        { start: new Date(year, 2, 20), end: new Date(year, 5, 20), class: 'spring' },
+        { start: new Date(year, 5, 21), end: new Date(year, 8, 22), class: 'summer' },
+        { start: new Date(year, 8, 23), end: new Date(year, 11, 21), class: 'autumn' },
+        { start: new Date(year, 11, 22), end: new Date(year, 2, 19), class: 'winter' }
+      ];
+  
+      for (let season of seasons) {
+        if (today >= season.start && today <= season.end) {
+          document.body.classList.add(season.class);
+          break;
+        }
+      }
+    } else {
+      document.body.classList.add('default');
+    }
+  }, [backgroundSeasonal]); // Add backgroundSeasonal as a dependency
 
   return (
     <div className={"app-wrapper"}>
       <ThemeProvider theme={theme}>
         <Router>
-          <Navigation showRomanisation={showRomanisation} setShowRomanisation={setShowRomanisation}/>
+          <Navigation showRomanisation={showRomanisation} setShowRomanisation={setShowRomanisation} />
           <section id="content">
             <RoutesWrapper showRomanisation={showRomanisation} setShowRomanisation={setShowRomanisation} />
           </section>
-          <BottomNavigation showRomanisation={showRomanisation} setShowRomanisation={setShowRomanisation} />
+          <BottomNavigation showRomanisation={showRomanisation} setShowRomanisation={setShowRomanisation} backgroundSeasonal={backgroundSeasonal} setBackgroundSeasonal={setBackgroundSeasonal} />
         </Router>
       </ThemeProvider>
     </div >

@@ -18,12 +18,33 @@ body {
   justify-content: center;
   align-items: center;
   margin: 0;
-  background-image: url("../assets/header.jpeg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
   background-color: #e3e3e3 !important;
+
+  &.spring {
+    background-image: url("../assets/background-spring.jpg");
+  }
+  
+  &.summer {
+    background-image: url("../assets/background-summer.jpg");
+  }
+  
+  &.autumn {
+    background-image: url("../assets/background-autumn.jpg");
+  }
+  
+  &.winter {
+    background-image: url("../assets/background-winter.jpg");
+  }
+
+  &.default {
+    background-image: url("../assets/background-default.jpeg");
+  }
+
+
   section#content {
     margin: auto;
     margin-top: 85px;
@@ -33,6 +54,7 @@ body {
     margin-bottom: 50px;
   }
 }
+
 
 .app-toolbar {
   width: calc(100% - 14px) !important;
