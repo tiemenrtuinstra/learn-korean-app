@@ -3,7 +3,7 @@ import { Button, Card, Paper, Grid } from '@mui/material'; // Import the Grid co
 import numbers from '../Numbers';
 import NumberSystem from '../components/NumberSystem';
 
-const NumberList = () => {
+const NumberList = ({showRomanisation}: {showRomanisation: boolean}) => {
   const [selectedSystem, setSelectedSystem] = useState<'korean' | 'sino-korean'>('korean');
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -18,7 +18,7 @@ const NumberList = () => {
   };
 
   return (
-    <div style={{marginBottom:'14px'}}>
+    <div style={{ marginBottom: '14px' }}>
       <Card component={Paper} className='max-width'
         sx={{ maxWidth: 800, margin: "auto", padding: "1rem 0px " }}>
         <Grid container justifyContent="center" spacing={2} style={{ padding: '0px 14px' }}>
@@ -45,6 +45,7 @@ const NumberList = () => {
 
       {numbers &&
         <NumberSystem
+          showRomanisation={showRomanisation}
           numbers={numbers}
           page={page}
           rowsPerPage={rowsPerPage}

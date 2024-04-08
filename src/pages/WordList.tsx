@@ -15,7 +15,7 @@ import { Word } from "../dto/types";
 import { handleSearch, SearchFilter } from "../components/SearchFilter";
 import { LanguageCell, ListenCell, LanguageHeadCell, ListenHeadCell } from "../components/TableCell";
 
-const WordList = () => {
+const WordList = ({ showRomanisation, setShowRomanisation }: { showRomanisation: boolean, setShowRomanisation: (value: boolean) => void }) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   /*eslint-disable-next-line*/
@@ -72,7 +72,7 @@ const WordList = () => {
 
   return (
 
-    <div style={{ marginBottom: '14px' }}>
+    <div style={{ marginBottom: '14px' }} className='max-width'>
       <SearchFilter
         searchTerm={searchTerm}
         handleSearch={handleSearch}
@@ -84,7 +84,7 @@ const WordList = () => {
         sx={{ margin: "auto", marginTop: 2 }}
       >
 
-        <Table className="wordlist-table">
+        <Table className="wordlist-table max-width">
           <TableHead>
             <TableRow>
               <LanguageHeadCell
@@ -94,7 +94,9 @@ const WordList = () => {
                 sortDirection={sortDirection}
                 handleSort={handleSort}
               />
-              <TableCell sx={{ fontWeight: "bold" }}></TableCell>
+              {showRomanisation && (
+                <TableCell sx={{ fontWeight: "bold" }}>Romanisatie</TableCell>
+              )}
               <ListenHeadCell />
               <LanguageHeadCell
                 language="dutch"
@@ -109,7 +111,9 @@ const WordList = () => {
             {paginatedWords.map((word, index) => (
               <TableRow key={index}>
                 <LanguageCell word={word} field="hangul" />
-                <LanguageCell word={word} field="romanisation" />
+                {showRomanisation && (
+                  <LanguageCell word={word} field="romanisation" />
+                )}
                 <ListenCell text={word.hangul} lang="ko" />
                 <LanguageCell word={word} field="dutch" />
               </TableRow>

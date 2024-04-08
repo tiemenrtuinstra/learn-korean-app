@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect } from 'react';
+import React from 'react';
 import { Route, Routes, useParams } from 'react-router-dom';
 
 import Introduction from './pages/Introduction';
@@ -28,7 +28,6 @@ import PinIcon from '@mui/icons-material/PinOutlined';
 import FillIcon from '@mui/icons-material/FormatColorFill';
 import FinishedIcon from '@mui/icons-material/CheckCircleOutline';
 import StyleIcon from '@mui/icons-material/StyleOutlined';
-import SettingsIcon from '@mui/icons-material/Settings';
 import InfoIcon from '@mui/icons-material/InfoOutlined';
 import { RouteOption } from './dto/types';
 import ResetCheatModeOnRouteChange from './hooks/ResetCheatModeOnRouteChange';
@@ -50,14 +49,14 @@ const settingsRoutes: RouteOption[] = [
     { path: "/colofon", title: "Colofon", element: <Colofon />, isSetting: true, icon: <InfoIcon />, enabled: true },
 ];
 
-export const RoutesOptions: RouteOption[] = [
+export const getRoutesOptions = (showRomanisation: boolean, setShowRomanisation: any):RouteOption[] => [
     { path: "/", title: "Introduction", element: <Introduction />, inBottomNav: false, inDrawer: false, isExercise: false, icon: <HomeIcon />, enabled: true },
-    { path: "/Alfabet", title: "Alfabet", element: <HangulAlphabet />, inBottomNav: true, inDrawer: false, isExercise: false, icon: <HangulIcon />, enabled: true },
-    { path: "/woorden-lijst", title: "Woordenlijst", element: <WordList />, inBottomNav: true, inDrawer: false, isExercise: false, icon: <ListIcon />, enabled: true },
-    { path: "/woorden-kaarten", title: "Flashcards", element: <WordCards />, inBottomNav: true, inDrawer: false, isExercise: false, icon: <StyleIcon />, enabled: true },
-    { path: "/nummers", title: "Nummers", element: <NumberList />, inBottomNav: true, inDrawer: false, isExercise: false, icon: <PinIcon />, enabled: true },
-    { path: "/vertaler", title: "Vertalen", element: <Translator />, inBottomNav: true, inDrawer: false, isExercise: false, icon: <TranslateIcon />, enabled: true },
-    { path: "/oefeningen", title: "oefeningen", element: <Exercise />, inBottomNav: true, inDrawer: false, isExercise: false, icon: <ExerciseIcon />, enabled: true },
+    { path: "/Alfabet", title: "Alfabet", element: <HangulAlphabet showRomanisation={showRomanisation}/>, inBottomNav: true, inDrawer: false, isExercise: false, icon: <HangulIcon />, enabled: true },
+    { path: "/woorden-lijst", title: "Woordenlijst", element: <WordList showRomanisation={showRomanisation} setShowRomanisation={setShowRomanisation}/>, inBottomNav: true, inDrawer: false, isExercise: false, icon: <ListIcon />, enabled: true },
+    { path: "/woorden-kaarten", title: "Flashcards", element: <WordCards showRomanisation={showRomanisation} setShowRomanisation={setShowRomanisation}/>, inBottomNav: true, inDrawer: false, isExercise: false, icon: <StyleIcon />, enabled: true },
+    { path: "/nummers", title: "Nummers", element: <NumberList showRomanisation={showRomanisation}/>, inBottomNav: true, inDrawer: false, isExercise: false, icon: <PinIcon />, enabled: true },
+    { path: "/vertaler", title: "Vertalen", element: <Translator />, inBottomNav: true, inDrawer: false, isExercise: false, icon: <TranslateIcon />, enabled: false },
+    { path: "/oefeningen", title: "oefeningen", element: <Exercise showRomanisation={showRomanisation} setShowRomanisation={setShowRomanisation}/>, inBottomNav: true, inDrawer: false, isExercise: false, icon: <ExerciseIcon />, enabled: true },
     ...excerciseRoutes,
     { path: "/finished/:score/:correctAnswers/:wrongAnswers/:cheatMode", title: "Uitslag", element: <FinishedPageWrapper />, inBottomNav: false, inDrawer: false, isExercise: false, icon: <FinishedIcon />, enabled: true },
     ...settingsRoutes,
@@ -70,20 +69,21 @@ export const RoutesOptions: RouteOption[] = [
 })
     .filter(route => route.enabled);
 
-export default RoutesOptions;
+export default getRoutesOptions;
 
-export const RoutesWrapper: React.FC = () => {
+export const RoutesWrapper: React.FC<{ showRomanisation: boolean, setShowRomanisation: React.Dispatch<React.SetStateAction<boolean>> }> = ({ showRomanisation, setShowRomanisation }) => {
+    const RoutesOptions = getRoutesOptions(showRomanisation, setShowRomanisation);
     return (<>
         <ResetCheatModeOnRouteChange />
         <Routes>
-            {RoutesOptions.filter((route: { enabled: any; }) => route.enabled).map((route: RouteOption) => (
-                <Route key={route.path} path={route.path} element={route.element} />
+            {RoutesOptions.filter((route: { enabled: boolean; }) => route.enabled).map((route: RouteOption) => (
+                <Route key={route.path} path={route.path} element={route.element}/>
             ))}
         </Routes>
     </>
     );
 }
 
-export function isAnyRouteInDrawerEnabled(): boolean {
-    return RoutesOptions.some(route => route.inDrawer);
+export function isAnyRouteInDrawerEnabled(showRomanisation: boolean ,setShowRomanisation: any): boolean {
+    return getRoutesOptions(showRomanisation,setShowRomanisation).some((route: RouteOption) => route.inDrawer);
 }

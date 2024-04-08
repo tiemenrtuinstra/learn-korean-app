@@ -30,6 +30,7 @@ export type SinoKoreanNumber = {
 };
 
 export type NumberListProps = {
+  showRomanisation: Boolean;
   numbers: Number[];
   page: number;
   rowsPerPage: number;

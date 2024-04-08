@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router } from 'react-router-dom';
 
 import { RoutesWrapper } from "./Routes";
@@ -28,7 +28,6 @@ export const Colors = {
   Primary: primaryColor,
   Secondary: secondaryColor
 }
-console.log(Colors);
 
 const theme = createTheme({
   palette: {
@@ -74,16 +73,17 @@ const theme = createTheme({
 
 
 const App = () => {
+  const [showRomanisation, setShowRomanisation] = useState(true);
 
   return (
     <div className={"app-wrapper"}>
       <ThemeProvider theme={theme}>
         <Router>
-          <Navigation />
+          <Navigation showRomanisation={showRomanisation} setShowRomanisation={setShowRomanisation}/>
           <section id="content">
-            <RoutesWrapper />
+            <RoutesWrapper showRomanisation={showRomanisation} setShowRomanisation={setShowRomanisation} />
           </section>
-          <BottomNavigation />
+          <BottomNavigation showRomanisation={showRomanisation} setShowRomanisation={setShowRomanisation} />
         </Router>
       </ThemeProvider>
     </div >

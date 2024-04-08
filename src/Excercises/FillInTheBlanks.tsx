@@ -29,8 +29,7 @@ const FillInTheBlanks = () => {
   // Remove a random character from the Hangul word
   const charIndexToRemove = Math.floor(Math.random() * currentWord.hangul.length);
   const partialWord = currentWord.hangul.slice(0, charIndexToRemove) + '_' + currentWord.hangul.slice(charIndexToRemove + 1);
-console.log(currentWord.hangul);
-console.log(partialWord);
+
   return (
     <>
       <Card className='max-width'>

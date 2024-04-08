@@ -1,0 +1,229 @@
+qol improvements
+
+> Please enter the commit message for your changes. Lines starting
+> with '>' will be ignored, and an empty message aborts the commit.
+>
+> On branch main
+> Your branch and 'origin/main' have diverged,
+> and have 3 and 1 different commits each, respectively.
+>   (use "git pull" to merge the remote branch into yours)
+>
+> Changes to be committed:
+>	modified:   src/Alphabet.tsx
+>	modified:   src/components/SearchFilter.tsx
+>	modified:   src/components/TableCell.tsx
+>	modified:   src/components/form/WordSourceSelect.tsx
+>	modified:   src/dto/enums.tsx
+>	modified:   src/dto/types.tsx
+>	modified:   src/pages/HangulAlphabet.tsx
+>	modified:   src/pages/WordCards.tsx
+>	modified:   src/pages/WordList.tsx
+>	modified:   src/scss/App.scss
+>
+> ------------------------ >8 ------------------------
+> Do not modify or remove the line above.
+> Everything below it will be ignored.
+diff --git a/src/Alphabet.tsx b/src/Alphabet.tsx
+index 93d425a..11c40ae 100644
+--- a/src/Alphabet.tsx
++++ b/src/Alphabet.tsx
+@@ -3,11 +3,28 @@ import { AlphabetType, ResourceType } from './dto/enums';
+ import alphabetJson from './database/alphabet.json';
+ 
+ export const alphabetTypeExplanations = {
+-  [AlphabetType.Klinker]: 'Klinkers zijn de letters die je uitspreekt met je mond open. In het Koreaans zijn er 10 klinkers.',
+-  [AlphabetType.DubbeleKlinker]: 'Dubbele klinkers zijn klinkers die je uitspreekt met je mond open, maar die je langer uitspreekt dan normale klinkers. In het Koreaans zijn er 11 dubbele klinkers.',
+-  [AlphabetType.Medeklinker]: 'Medeklinkers zijn de letters die je uitspreekt met je mond dicht. In het Koreaans zijn er 14 medeklinkers.',
+-  [AlphabetType.OpgezogenMedeklinkers]: 'Opgezogen medeklinkers zijn medeklinkers die je uitspreekt met je mond dicht, maar die je langer uitspreekt dan normale medeklinkers. In het Koreaans zijn er 5 opgezogen medeklinkers.',
+-  [AlphabetType.GespannenMedeklinkers]: 'Gespannen medeklinkers zijn medeklinkers die je uitspreekt met je mond dicht, maar die je met meer spanning uitspreekt dan normale medeklinkers. In het Koreaans zijn er 5 gespannen medeklinkers.',
++  [AlphabetType.Klinker]: `In het moderne hangeul zijn er technisch gezien 10 klinkers. Dat zijn de eerste 10 letters die je tegenkomt in de
++  tabel. Maar je ziet dat er nog 4 klinkers staan. Officieel worden deze klinkers gezien als een combinatie van twee
++  klinkers, maar je gebruikt ze gewoon als één Klinker.`,
++  [AlphabetType.DubbeleKlinker]: `Net zoals in het Nederlands heb je in het Koreaans ook lettergrepen waarbij er 2 klinkers na elkaar komen.
++  Wanneer je deze klinkers samenvoegt, dan krijgen deze een iets andere uitspraak. Deze twee klinkers zijn altijd een
++  combinatie van een liggende en een staande Klinker. Als je deze beide klinkers snel achter elkaar uitspreekt, krijg
++  je vanzelf de klank die je moet krijgen, namelijk een ‘w’ klank. Laten we kijken in de tabel hieronder hoe dat er uit
++  komt te zien.`,
++  [AlphabetType.Medeklinker]: `Het hangeul heeft in totaal 14 medeklinkers. De medeklinkers kunnen worden opgesplitst in verschillende
++  categorieën en vervolgens weer in subcategorieën. Zo worden de medeklinkers niet alleen verdeeld op basis
++  van waar in je mond het geluid vandaan komt, maar ook op hoeveel lucht bij de klank komt of de intensiteit van
++  de uitspraak. Zo krijg je de simpele medeklinkers, de aspiratie medeklinkers en de spanning medeklinkers. De
++  onderverdeling hiervan is niet belangrijk voor het leren van de letters, maar mocht je er meer over willen weten,
++  dan staat er wat extra informatie bij de fun facts.`,
++  [AlphabetType.AspiratieMedeklinkers]: `Deze medeklinkers worden officieel aspiratie medeklinkers genoemd. Aspiratie betekent dat er lucht bij de
++  uitgesproken klanken wordt toegevoegd. Om te zien of een Klinker een Aspiratie Medeklinker is, kan je je hand
++  voor je mond houden. Bij het uitspreken van een Aspiratie Medeklinker voel je een luchtstroom tegen je hand aan,
++  terwijl een simpele Klinker dit niet zal hebben.`,
++  [AlphabetType.SpanningMedeklinkers]: `Deze medeklinkers worden ook wel de spanning medeklinkers genoemd. Dit zijn de medeklinkers waarbij de
++  klank met nadruk of spanning wordt uitgesproken. Deze medeklinkers worden gezien als extra. De beginletters van
++  Nederlandse woorden worden vaak uitgesproken met deze spanning klinkers, zoals het woord kaas of de naam
++  Peter.`,
+ };
+ 
+ // Ensure that alphabetJson is an array of Alphabet objects
+@@ -19,7 +36,4 @@ alphabet = alphabet.map(a => ({
+   resource: ResourceType.Alphabet,
+ }));
+ 
+-
+-
+-
+ export default alphabet;
+\ No newline at end of file
+diff --git a/src/components/SearchFilter.tsx b/src/components/SearchFilter.tsx
+index 70852ba..9036a79 100644
+--- a/src/components/SearchFilter.tsx
++++ b/src/components/SearchFilter.tsx
+@@ -83,7 +83,7 @@ export const SearchFilter: React.FC<SearchFilterProps> = ({
+             <Grid container spacing={2} alignItems="center">
+               <Grid item xs={12} sm={6}>
+                 <TextField
+-                  label="Search"
++                  label="Zoeken"
+                   variant="outlined"
+                   size="small"
+                   value={searchTerm}
+diff --git a/src/components/TableCell.tsx b/src/components/TableCell.tsx
+index acb5c31..13180ee 100644
+--- a/src/components/TableCell.tsx
++++ b/src/components/TableCell.tsx
+@@ -49,7 +49,7 @@ export const LanguageHeadCell = ({
+ );
+ 
+ export const ListenHeadCell = () => (
+-  <TableCell className={"hangulFont"} align="right" sx={{ fontWeight: "bold", }}>
++  <TableCell className={"hangulFont"} align="center" sx={{ fontWeight: "bold", }}>
+     듣다
+   </TableCell>
+ );
+diff --git a/src/components/form/WordSourceSelect.tsx b/src/components/form/WordSourceSelect.tsx
+index f29a8ee..0fa2447 100644
+--- a/src/components/form/WordSourceSelect.tsx
++++ b/src/components/form/WordSourceSelect.tsx
+@@ -19,7 +19,7 @@ const WordSourceSelect: FC<WordSourceSelectProps> = ({ sourceFilter, wordSources
+         fullWidth
+     >
+         <MenuItem value="">
+-            <em>Alle categorieen</em>
++            <em>Alle categorieën</em>
+         </MenuItem>
+         {wordSources.map((source) => (
+             <MenuItem key={source.id} value={source.value}>
+diff --git a/src/dto/enums.tsx b/src/dto/enums.tsx
+index 6fc100f..92cb0c5 100644
+--- a/src/dto/enums.tsx
++++ b/src/dto/enums.tsx
+@@ -13,6 +13,6 @@ export enum AlphabetType {
+     Klinker = "klinkers",
+     DubbeleKlinker = "dubbele klinkers",
+     Medeklinker = "Medeklinker",
+-    OpgezogenMedeklinkers = "opgezogen medeklinkers",
+-    GespannenMedeklinkers = "gespannen medeklinkers",
++    AspiratieMedeklinkers = "aspiratie medeklinkers",
++    SpanningMedeklinkers = "spanning medeklinkers",
+   };
+\ No newline at end of file
+diff --git a/src/dto/types.tsx b/src/dto/types.tsx
+index 3d3a6f5..1fd6777 100644
+--- a/src/dto/types.tsx
++++ b/src/dto/types.tsx
+@@ -54,6 +54,7 @@ export type Alphabet = {
+   hangul: string;
+   romanisation: string;
+   type: AlphabetType;
++  name?: string;
+   remarks?: string;
+   resource: ResourceType.Alphabet;
+ };
+diff --git a/src/pages/HangulAlphabet.tsx b/src/pages/HangulAlphabet.tsx
+index fcc4d64..5499438 100644
+--- a/src/pages/HangulAlphabet.tsx
++++ b/src/pages/HangulAlphabet.tsx
+@@ -36,7 +36,10 @@ function HangulAlphabet() {
+                                     <SpeakCard text={letter.hangul} lang={'ko'} cardContent={<>
+                                         <Typography variant="h5" align="center" className={"hangulFont"}>{letter.hangul}</Typography>
+                                         <Typography variant="subtitle1" align="center">{Array.isArray(letter.romanisation) ? letter.romanisation.join(', ') : letter.romanisation}
+-                                            {letter.remarks && ` (${letter.remarks})`}
++                                            {letter.name && ` ( ${letter.name} )`}
++                                        </Typography>
++                                        <Typography variant="subtitle2" align="center">
++                                            {letter.remarks && ` ( ${letter.remarks} )`}
+                                         </Typography>
+                                     </>
+                                     } />
+@@ -46,6 +49,22 @@ function HangulAlphabet() {
+                     </div>
+                 ))
+             }
++            <Grid container spacing={2}>
++                <Grid item xs={12} style={{ marginTop: '14px' }}>
++                    <Card>
++                        <CardContent>
++                            <Typography variant="h4">Opmerkingen</Typography>
++                            <Typography variant="h5">Klinkers</Typography>
++                            <Typography variant="subtitle1">
++                                <ul>
++                                    <li>De ‘e’ en de ‘ae’ hierboven hebben dezelfde uitspraak, maar worden anders geschreven. Een beetje zoals in het Nederlands met ‘au’ en ‘ou’.</li>
++                                    <li>De ‘ye’ heeft net zoals bij de ‘e’ dezelfde uitspraak als ‘yae’.</li>
++                                </ul>
++                            </Typography>
++                        </CardContent>
++                    </Card>
++                </Grid>
++            </Grid>
+         </section >
+     );
+ }
+diff --git a/src/pages/WordCards.tsx b/src/pages/WordCards.tsx
+index 659cab7..0b00dd5 100644
+--- a/src/pages/WordCards.tsx
++++ b/src/pages/WordCards.tsx
+@@ -84,7 +84,7 @@ const WordCards = () => {
+                   fullWidth
+                 >
+                   <MenuItem value="all">
+-                    <em>Alle categorieen</em>
++                    <em>Alle categorieën</em>
+                   </MenuItem>
+ 
+                   <MenuItem value={ResourceType.Word}>Woorden</MenuItem>
+diff --git a/src/pages/WordList.tsx b/src/pages/WordList.tsx
+index 62f2dd1..adb20ab 100644
+--- a/src/pages/WordList.tsx
++++ b/src/pages/WordList.tsx
+@@ -5,6 +5,7 @@ import {
+   TableBody,
+   TableContainer,
+   TableHead,
++  TableCell,
+   TableRow,
+   Paper,
+   TablePagination,
+@@ -93,6 +94,7 @@ const WordList = () => {
+                 sortDirection={sortDirection}
+                 handleSort={handleSort}
+               />
++              <TableCell sx={{ fontWeight: "bold" }}></TableCell>
+               <ListenHeadCell />
+               <LanguageHeadCell
+                 language="dutch"
+@@ -107,6 +109,7 @@ const WordList = () => {
+             {paginatedWords.map((word, index) => (
+               <TableRow key={index}>
+                 <LanguageCell word={word} field="hangul" />
++                <LanguageCell word={word} field="romanisation" />
+                 <ListenCell text={word.hangul} lang="ko" />
+                 <LanguageCell word={word} field="dutch" />
+               </TableRow>
+diff --git a/src/scss/App.scss b/src/scss/App.scss
+index 85cb353..04c3f12 100644
+--- a/src/scss/App.scss
++++ b/src/scss/App.scss
+@@ -30,6 +30,7 @@ body {
+     padding-left: 0.5rem;
+     padding-right: 0.5rem;
+     padding-bottom: 0.5rem;
++    margin-bottom: 50px;
+   }
+ }
+ 

@@ -13,14 +13,10 @@ export const AlphabetCard = ({ resource }: { resource: Alphabet }) => (
   </>
 );
 
-export const AlphabetCardBack = ({ resource }: { resource: Alphabet }) => (
+export const AlphabetCardBack = ({ resource, showRomanisation }: { resource: Alphabet; showRomanisation: boolean }) => (
   <>
     {resource && (
       <>
-        <Typography variant="h3" align="center">
-          {Array.isArray(resource.romanisation) ? resource.romanisation.join(', ') : resource.romanisation}
-          {resource.remarks && ` (${resource.remarks})`}
-        </Typography>
         <Typography variant="h5" align="center">{resource.type}</Typography>
       </>
     )}

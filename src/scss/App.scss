@@ -117,7 +117,12 @@ body {
     color: $success !important;
   }
 }
-
+section {
+  &.max-width {
+    width: 900px ;
+    max-width: calc(100vw - 31px) !important;
+  }
+}
 .MuiPaper-root {
   background-color: $white-card-bg !important;
   backdrop-filter: blur(
@@ -125,8 +130,8 @@ body {
   ) !important; // Apply a blur effect to the content behind the element
 
   &.max-width {
-    width: 500px !important;
-    max-width: calc(100vw - 14px) !important;
+    width: 900px;
+    max-width: calc(100vw - 31px) !important;
   }
 
   &.alert {
@@ -184,12 +189,7 @@ table {
   }
   &.wordlist-table {
     tr {
-      th:nth-child(1) {
-        width: 40%;
-      }
-      th:nth-child(3) {
-        width: 50%;
-      }
+
     }
   }
   &.number-table {
@@ -277,4 +277,20 @@ table {
     padding: 0px !important;
     margin: 0px;
   }
+}
+
+.speakCardContainer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+}
+
+.speakCardContainer > * {
+  flex-grow: 1;
+  flex-basis: calc((900px - 100%) * 999);
+  margin: 5px;
+}
+
+.speakCardContainer > .speak-card > button {
+  height: 100%;
 }

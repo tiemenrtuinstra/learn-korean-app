@@ -7,7 +7,7 @@ import {
   CardContent,
   Grid,
 } from "@mui/material";
-import words, { wordSources } from "../Words";
+import { wordSources } from "../Words";
 import WordSourceSelect from "../components/form/WordSourceSelect";
 import { Word } from "../dto/types";
 
@@ -77,7 +77,7 @@ export const SearchFilter: React.FC<SearchFilterProps> = ({
 
   return (
     <div>
-      <Card className="table-filter" sx={{ maxWidth: 800, margin: "auto", marginTop: 2 }}>
+      <Card className="table-filter max-width" sx={{  margin: "auto", marginTop: 2 }}>
         <CardContent>
           <form noValidate autoComplete="off">
             <Grid container spacing={2} alignItems="center">

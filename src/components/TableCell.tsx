@@ -1,6 +1,6 @@
 // TableCellComponents.tsx
 import React from "react";
-import { TableCell, TableSortLabel } from "@mui/material";
+import { TableCell, TableSortLabel, Typography } from "@mui/material";
 import { SpeakButton } from "./Speak";
 
 export const ListenCell = ({
@@ -17,10 +17,9 @@ export const ListenCell = ({
 
 export const LanguageCell = ({ word, field }: { word: any; field: string }) => (
   <TableCell>
-    <span>{word[field]}</span>
+    <Typography variant="body1">{word[field]}</Typography>
   </TableCell>
 );
-
 
 export const LanguageHeadCell = ({
   language,
@@ -42,6 +41,7 @@ export const LanguageHeadCell = ({
         sortField === language ? (sortDirection as "asc" | "desc") : "asc"
       }
       onClick={() => handleSort(language)}
+      style={{ fontWeight: "bold" }}
     >
       {fieldTitle ? fieldTitle : language.charAt(0).toUpperCase() + language.slice(1)}
     </TableSortLabel>

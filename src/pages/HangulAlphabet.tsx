@@ -1,11 +1,17 @@
 import React from 'react';
 import alphabet, { alphabetTypeExplanations } from '../Alphabet';
 import { SpeakCard } from '../components/Speak';
-import { Card, CardContent, Grid, Typography } from '@mui/material';
+import { Accordion, AccordionDetails, AccordionSummary, Card, CardContent, Grid, Typography } from '@mui/material';
 import { Alphabet } from '../dto/types';
 import { AlphabetType } from '../dto/enums';
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
-function HangulAlphabet() {
+interface HangulAlphabetProps {
+    showRomanisation: boolean;
+}
+
+function HangulAlphabet({ showRomanisation }: HangulAlphabetProps): JSX.Element {
     // Group alphabet by type
     const alphabetByType: { [key in AlphabetType]?: Alphabet[] } = alphabet.reduce((groups, letter) => {
         const group = (groups[letter.type as AlphabetType] || []) as Alphabet[];
@@ -14,57 +20,69 @@ function HangulAlphabet() {
         return groups;
     }, {} as { [key in AlphabetType]?: Alphabet[] });
 
-
     return (
-        <section style={{
-            marginTop: '-28px', marginBottom: '14px'
-        }}>
-            {
-                Object.entries(alphabetByType).map(([type, letters]) => (
-                    <div key={type}>
-                        <Grid container spacing={2}>
-                            <Grid item xs={12} style={{ marginTop: '14px' }}>
-                                <Card>
-                                    <CardContent>
-                                        <Typography variant="h4">{type}</Typography>
-                                        <Typography variant="subtitle1">{alphabetTypeExplanations[type as AlphabetType]}</Typography>
-                                    </CardContent>
-                                </Card>
-                            </Grid>
-                            {letters.map((letter, index) => (
-                                <Grid item xs={4} sm={2} key={index}>
-                                    <SpeakCard text={letter.hangul} lang={'ko'} cardContent={<>
-                                        <Typography variant="h5" align="center" className={"hangulFont"}>{letter.hangul}</Typography>
-                                        <Typography variant="subtitle1" align="center">{Array.isArray(letter.romanisation) ? letter.romanisation.join(', ') : letter.romanisation}
-                                            {letter.name && ` ( ${letter.name} )`}
-                                        </Typography>
-                                        <Typography variant="subtitle2" align="center">
-                                            {letter.remarks && ` ( ${letter.remarks} )`}
-                                        </Typography>
-                                    </>
-                                    } />
-                                </Grid>
-                            ))}
+        <section style={{ marginTop: "-7px", marginBottom: '14px' }} className='max-width'>
+            {Object.entries(alphabetByType).map(([type, letters]) => (
+                <div key={type}>
+                    <Grid container spacing={0}>
+                        <Grid item xs={12} style={{ marginTop: "7px", marginBottom: "7px" }}>
+                            <Accordion>
+                                <AccordionSummary
+                                    expandIcon={<ArrowDownwardIcon />}
+                                    aria-controls="{type}-content"
+                                    id='{type}-header'
+                                >
+                                    <Typography variant="h4">{type}s</Typography>
+                                </AccordionSummary>
+                                <AccordionDetails>
+                                    <Typography variant="subtitle1">{alphabetTypeExplanations[type as AlphabetType]}</Typography>
+
+                                    <ul>{
+                                        /*if type is klinkers then show the following*/
+                                        type === 'Klinker' && (
+                                            <>
+                                                <li>De ‘e’ en de ‘ae’ hierboven hebben dezelfde uitspraak, maar worden anders geschreven. Een beetje zoals in het Nederlands met ‘au’ en ‘ou’.</li>
+                                                <li>De ‘ye’ heeft net zoals bij de ‘e’ dezelfde uitspraak als ‘yae’.</li>
+                                            </>
+                                        )
+
+                                    }{
+                                            letters.map((letter, index) => (
+                                                <li key={index}>
+                                                    <Typography variant="h5" style={{ display: "inline" }} className={"hangulFont"}>{letter.hangul}</Typography> {letter.remarks}
+                                                </li>
+
+                                            ))
+                                        }
+                                    </ul>
+                                </AccordionDetails>
+                            </Accordion>
+
+
+
                         </Grid>
-                    </div>
-                ))
-            }
-            <Grid container spacing={2}>
-                <Grid item xs={12} style={{ marginTop: '14px' }}>
-                    <Card>
-                        <CardContent>
-                            <Typography variant="h4">Opmerkingen</Typography>
-                            <Typography variant="h5">Klinkers</Typography>
-                            <Typography variant="subtitle1">
-                                <ul>
-                                    <li>De ‘e’ en de ‘ae’ hierboven hebben dezelfde uitspraak, maar worden anders geschreven. Een beetje zoals in het Nederlands met ‘au’ en ‘ou’.</li>
-                                    <li>De ‘ye’ heeft net zoals bij de ‘e’ dezelfde uitspraak als ‘yae’.</li>
-                                </ul>
-                            </Typography>
-                        </CardContent>
-                    </Card>
-                </Grid>
-            </Grid>
+                        {letters.map((letter, index) => (
+                            <Grid item xs={6} sm={2} md={2} lg={2} key={index} className="speakCardContainer">
+                                <SpeakCard text={letter.hangul} lang={'ko'} cardContent={
+                                    <>
+                                        <Typography variant="h5" align="center" className={"hangulFont"}>{letter.hangul}</Typography>
+
+                                        {showRomanisation && (
+                                            <>
+                                                <Typography variant="subtitle1" align="center">
+                                                    {Array.isArray(letter.romanisation) ? letter.romanisation.join(', ') : letter.romanisation}
+                                                </Typography>
+                                                <Typography variant="subtitle2" align="center">
+                                                    {letter.name && ` ( ${letter.name} )`}
+                                                </Typography></>
+                                        )}
+                                    </>
+                                } />
+                            </Grid>
+                        ))}
+                    </Grid>
+                </div>
+            ))}
         </section >
     );
 }

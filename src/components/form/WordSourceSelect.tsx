@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import { MenuItem, Select, SelectChangeEvent } from '@mui/material';
-import wordSources from '../../Words';
 import { WordSource } from '../../dto/types';
 
 interface WordSourceSelectProps {

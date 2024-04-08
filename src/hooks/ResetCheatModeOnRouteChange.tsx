@@ -1,9 +1,10 @@
-import React, { ReactNode, useEffect, useState } from 'react'
-import { Route, Routes, useLocation, useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom';
 import useCheat from './useCheat';
 
 const ResetCheatModeOnRouteChange: React.FC = () => {
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [alert, setAlert] = useState({ open: false, type: '', message: '' });
     const location = useLocation();
     const { setCheatMode } = useCheat([], [], setAlert); // Replace arg1, arg2, arg3 with the actual arguments

@@ -4,25 +4,14 @@ import {
   Toolbar,
   Typography,
   IconButton,
-  Button,
-  ListItemIcon,
-  ListItemText,
-  Menu,
-  MenuItem,
-  Link,
 } from "@mui/material";
-
-
-import ContentPaste from '@mui/icons-material/ContentPaste';
-
-
 import MenuIcon from "@mui/icons-material/Menu";
 import koreanFlag from "../assets/korean-flag.png";
 import easterEgg from '../assets/easteregg.gif';
 import NavDrawer from "./NavDrawer";
 import { isAnyRouteInDrawerEnabled } from "../Routes";
 
-const Navigation = () => {
+const Navigation = ({ showRomanisation, setShowRomanisation }: { showRomanisation: boolean, setShowRomanisation: React.Dispatch<React.SetStateAction<boolean>> }) => {
   const [drawerOpen, setDrawerOpen] = React.useState(false); // Add this line
   const [showEasterEgg, setShowEasterEgg] = useState(false);
 
@@ -45,7 +34,7 @@ const Navigation = () => {
       <AppBar className={"app-toolbar"} sx={{ position: 'fixed', top: 7, left: 7, right: 7, }}>
         <Toolbar sx={{ margin: '0px auto' }}>
 
-          {isAnyRouteInDrawerEnabled() === true && (
+          {isAnyRouteInDrawerEnabled(showRomanisation, setShowRomanisation) === true && (
             <>
               <IconButton
                 edge="start"
@@ -55,7 +44,7 @@ const Navigation = () => {
               >
                 <MenuIcon />
               </IconButton>
-              <NavDrawer open={drawerOpen} onClose={handleDrawerToggle} />
+              <NavDrawer open={drawerOpen} onClose={handleDrawerToggle} showRomanisation={showRomanisation} setShowRomanisation={setShowRomanisation} />
 
             </>
           )}
@@ -70,13 +59,6 @@ const Navigation = () => {
           <Typography color={"secondary"} variant="h3" className={"hangulFont"} onClick={() => setShowEasterEgg(true)}>
             한국
           </Typography>
-
-
-
-
-
-
-
         </Toolbar>
       </AppBar>
       {showEasterEgg && (

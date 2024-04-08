@@ -1,19 +1,16 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes, useParams } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 
-import { Avatar, BottomNavigation, BottomNavigationAction, Box, Button, CssBaseline, List, ListItemAvatar, ListItemButton, ListItemIcon, ListItemText, Menu, MenuItem, Paper } from '@mui/material';
+import { BottomNavigation, BottomNavigationAction, CssBaseline, Divider, ListItemIcon, ListItemText, Menu, MenuItem, Paper, Switch } from '@mui/material';
 import { Link } from 'react-router-dom';
-import WordListIcon from '@mui/icons-material/FormatListBulleted';
-import NumberListIcon from '@mui/icons-material/Filter1';
-import ExerciseIcon from '@mui/icons-material/FitnessCenter';
-import HangulIcon from '../assets/HangulIcon';
 import TranslateIcon from '@mui/icons-material/Translate';
-import RoutesOptions, { isAnyRouteInDrawerEnabled } from "../Routes";
+import { getRoutesOptions } from "../Routes";
 import { RouteOption } from '../dto/types';
 import SettingsIcon from '@mui/icons-material/Settings';
 
-export default function TabBottomNavigation() {
+export default function TabBottomNavigation({ showRomanisation, setShowRomanisation }: { showRomanisation: boolean, setShowRomanisation: React.Dispatch<React.SetStateAction<boolean>> }) {
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [value, setValue] = React.useState(0);
     const location = useLocation();
 
@@ -27,7 +24,6 @@ export default function TabBottomNavigation() {
         setAnchorEl(null);
     };
 
-
     return (
         <>
             <CssBaseline />
@@ -39,7 +35,7 @@ export default function TabBottomNavigation() {
                         setValue(newValue);
                     }}
                 >
-                    {RoutesOptions.filter((route: RouteOption) => !!route.inBottomNav).map((route: RouteOption) => (
+                    {getRoutesOptions(showRomanisation, setShowRomanisation).filter((route: RouteOption) => !!route.inBottomNav).map((route: RouteOption) => (
                         <BottomNavigationAction sx={{ minWidth: "40px" }}
                             // label={route.title}
                             icon={route.icon}
@@ -69,7 +65,20 @@ export default function TabBottomNavigation() {
                     'aria-labelledby': 'basic-button',
                 }}
             >
-                {RoutesOptions.filter((route: RouteOption) => !!route.isSetting).map((route: RouteOption) => (
+                <MenuItem>
+                    <ListItemIcon>
+                        <TranslateIcon fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText primary="Romanisatie" />
+                    <Switch
+                        checked={showRomanisation}
+                        onChange={() => setShowRomanisation(!showRomanisation)}
+                        name="Romanisation"
+                        inputProps={{ 'aria-label': 'toggle romanisation' }}
+                    />
+                </MenuItem>
+                <Divider />
+                {getRoutesOptions(showRomanisation, setShowRomanisation).filter((route: RouteOption) => !!route.isSetting).map((route: RouteOption) => (
                     <MenuItem key={route.path} component="a" href={route.path} onClick={handleClose}>
                         <ListItemIcon>{route.icon}</ListItemIcon>
                         <ListItemText primary={route.title} />

@@ -16,45 +16,65 @@ import { NumberCard, NumberCardBack } from '../components/NumberCard';
 
 import { combinedResources } from "../Resources";
 import { SpeakButton } from "../components/Speak";
-import { ResourceType } from "../dto/enums";
+import { AlphabetType, NumberType, ResourceType } from "../dto/enums";
 import { Alphabet, Word, KoreanNumber, SinoKoreanNumber } from "../dto/types";
-import words, { wordSources } from '../Words';
+import { wordSources } from '../Words';
 
-
-const WordCards = () => {
-
-
+const WordCards = ({ showRomanisation, setShowRomanisation }: { showRomanisation: boolean, setShowRomanisation: React.Dispatch<React.SetStateAction<boolean>> }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
   const [categoryFilter, setCategoryFilter] = useState('all');
   const [sourceFilter, setSourceFilter] = useState('all');
-  
+
   const handleCategoryFilterChange = useCallback((event: { target: { value: React.SetStateAction<string>; }; }) => {
     setCategoryFilter(event.target.value);
+    setSourceFilter('all');
   }, []);
-  
+
   const handleSourceFilterChange = useCallback((event: { target: { value: React.SetStateAction<string>; }; }) => {
     setSourceFilter(event.target.value);
   }, []);
-  
+
+  useEffect(() => {
+    setSourceFilter('all');
+    setCurrentIndex(0);
+  }, [categoryFilter]);
+
   const filteredResource = useMemo(() => {
     let result = combinedResources;
-  
+
     if (categoryFilter !== 'all') {
       result = result.filter(resource => resource.resource === categoryFilter);
     }
-  
     if (sourceFilter !== 'all') {
-      console.log('sourceFilter',sourceFilter);
-      result =  combinedResources
-      .filter(resource => resource.resource === ResourceType.Word && resource.source === sourceFilter)
-      .map(resource => {
-        // Perform your mapping logic here
-        // For example, if you want to extract the 'hangul' property:
-        return resource;
-      });
+      console.log('sourceFilter', sourceFilter);
+      console.log('sourceFilter voor result', result);
+      switch (categoryFilter) {
+        case ResourceType.Word:
+          result = result.filter(resource => resource && resource.resource === ResourceType.Word && resource.source === sourceFilter)
+            .map(resource => {
+              console.log('resource', resource);
+              return resource;
+            });
+          break;
+        case ResourceType.Alphabet:
+          result = result.filter(resource => resource && resource.resource === ResourceType.Alphabet && resource.type === sourceFilter)
+            .map(resource => {
+              console.log('resource', resource);
+              return resource;
+            });
+          break;
+        case ResourceType.Number:
+          result = result.filter(resource => resource && resource.resource === ResourceType.Number && resource.type === sourceFilter)
+            .map(resource => {
+              console.log('resource', resource);
+              return resource;
+            });
+          break;
+      }
+      console.log('sourceFilter na result', result);
     }
-  
+
     return result;
   }, [categoryFilter, sourceFilter]);
 
@@ -66,18 +86,7 @@ const WordCards = () => {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + filteredResource.length) % filteredResource.length);
   }, [filteredResource]);
 
-  function getResourceType(resource: any): resource is (Word | Alphabet | KoreanNumber | SinoKoreanNumber) {
-    return resource && [ResourceType.Word, ResourceType.Alphabet, ResourceType.Number].includes(resource.resource);
-  }
-
   const currentResource = filteredResource[currentIndex];
-console.log(currentResource);
-  if (currentResource) {
-    // Now you can safely access currentResource.hangul
-    console.log(currentResource.hangul);
-  } else {
-    console.log('currentResource is undefined');
-  }
 
   function isWord(resource: any): resource is Word {
     return resource && resource.resource === ResourceType.Word;
@@ -99,7 +108,7 @@ console.log(currentResource);
             <Grid container spacing={2} alignItems="center">
 
               <Grid item xs={12}>
-              <Select value={categoryFilter} onChange={handleCategoryFilterChange}
+                <Select value={categoryFilter} onChange={handleCategoryFilterChange}
                   variant="outlined"
                   size="small"
                   displayEmpty
@@ -114,26 +123,45 @@ console.log(currentResource);
                   <MenuItem value={ResourceType.Number}>Nummers</MenuItem>
                 </Select>
               </Grid>
-              <Grid item xs={12}>
-
-              <Select value={sourceFilter} onChange={handleSourceFilterChange}
-                  variant="outlined"
-                  size="small"
-                  displayEmpty
-                  fullWidth
-                >
-                  <MenuItem value="all">
-                    <em>Alle Bronnen</em>
-                  </MenuItem>
-
-                  {wordSources.map((source) => (
-                    <MenuItem key={source.id} value={source.value}>
-                      {source.value}
+              {/* Only show source filter when a category is selected */
+                categoryFilter === ResourceType.Word.toString() ||
+                  categoryFilter === ResourceType.Alphabet.toString() ||
+                  categoryFilter === ResourceType.Number.toString() ? <Grid item xs={12}>
+                  <Select value={sourceFilter} onChange={handleSourceFilterChange}
+                    variant="outlined"
+                    size="small"
+                    displayEmpty
+                    fullWidth
+                  >
+                    <MenuItem value="all">
+                      <em>Alle {currentResource.resource.valueOf()}</em>
                     </MenuItem>
-                  ))}
-                </Select>
 
-              </Grid>
+                    {isWord(currentResource) ?
+                      wordSources.map((source) => (
+                        <MenuItem key={source.value} value={source.value}>
+                          {source.value}
+                        </MenuItem>
+                      )) : <></>}
+
+                    {isAlphabet(currentResource) ?
+                      Object.values(AlphabetType).map((value) => (
+                        <MenuItem key={value} value={value}>
+                          {value}
+                        </MenuItem>
+                      )) : <></>}
+
+                    {isNumber(currentResource) ?
+                      Object.values(NumberType).map((value) => (
+                        <MenuItem key={value} value={value}>
+                          {value}
+                        </MenuItem>
+                      )) : <></>}
+                  </Select>
+                </Grid> : <></>
+
+              }
+
             </Grid>
           </form>
         </CardContent>
@@ -142,15 +170,15 @@ console.log(currentResource);
       <div onClick={() => setIsFlipped(!isFlipped)} className={`flip-card ${isFlipped ? 'flipped' : ''}`}>
         <Card className="card-front">
           <CardContent>
-            {currentResource && isWord(currentResource) && <WordCard resource={currentResource} />}
+            {currentResource && isWord(currentResource) && <WordCard resource={currentResource} showRomanisation={showRomanisation} />}
             {currentResource && isAlphabet(currentResource) && <AlphabetCard resource={currentResource} />}
-            {currentResource && isNumber(currentResource) && <NumberCard resource={currentResource} />}
+            {currentResource && isNumber(currentResource) && <NumberCard resource={currentResource} showRomanisation={showRomanisation} />}
           </CardContent>
         </Card>
         <Card className="card-back">
           <CardContent>
             {currentResource && isWord(currentResource) && <WordCardBack resource={currentResource} />}
-            {currentResource && isAlphabet(currentResource) && <AlphabetCardBack resource={currentResource} />}
+            {currentResource && isAlphabet(currentResource) && <AlphabetCardBack resource={currentResource} showRomanisation={showRomanisation} />}
             {currentResource && isNumber(currentResource) && <NumberCardBack resource={currentResource} />}
           </CardContent>
         </Card>
